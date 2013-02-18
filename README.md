@@ -237,7 +237,7 @@ Destroy the `Mail` object.
 
 This is simple a full example to send a mail.
 
-```
+```coffee
 # create the factory
 mailFactory = new MailFactory( "wmshop", "shopbot@webmart.de" )
 
