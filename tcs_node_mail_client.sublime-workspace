@@ -1,0 +1,919 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"nodegr",
+				"nodegroup_id"
+			],
+			[
+				"file",
+				"filename"
+			],
+			[
+				"_r",
+				"_runLuaScript"
+			],
+			[
+				"__c",
+				"__createRel"
+			],
+			[
+				"_v",
+				"_validate"
+			],
+			[
+				"training",
+				"trainingplan_id"
+			],
+			[
+				"stu",
+				"studios"
+			],
+			[
+				"te",
+				"templates"
+			],
+			[
+				"mar",
+				"margin-top"
+			],
+			[
+				"new",
+				"newToken"
+			],
+			[
+				"tre",
+				"trel"
+			],
+			[
+				"idx",
+				"idx-1"
+			],
+			[
+				"re",
+				"req	require"
+			],
+			[
+				"l",
+				"length"
+			],
+			[
+				"no",
+				"not-found"
+			],
+			[
+				"th",
+				"thridparty_id"
+			],
+			[
+				"st",
+				"statusCode"
+			],
+			[
+				"c",
+				"Cnf"
+			],
+			[
+				"spli",
+				"splice"
+			],
+			[
+				"trainingi",
+				"trainingitem_id"
+			],
+			[
+				"jso",
+				"jsonPower"
+			],
+			[
+				"jsonSe",
+				"jsonServo"
+			],
+			[
+				"tra",
+				"trainingplan_id"
+			],
+			[
+				"hu",
+				"hour"
+			],
+			[
+				"start",
+				"startdate"
+			],
+			[
+				"h",
+				"httpLogIP"
+			],
+			[
+				"par",
+				"parallel"
+			],
+			[
+				"sele",
+				"selects"
+			],
+			[
+				"se",
+				"sections"
+			],
+			[
+				"er",
+				"errObj"
+			],
+			[
+				"node",
+				"node_id"
+			],
+			[
+				"R_",
+				"R_TRAINING_DEVICE_LOGS"
+			],
+			[
+				"toke",
+				"tokenObj"
+			],
+			[
+				"pl",
+				"plan_id"
+			],
+			[
+				"tok",
+				"tokenObj"
+			],
+			[
+				"curr",
+				"currplan"
+			],
+			[
+				"plan",
+				"plan_version"
+			],
+			[
+				"to",
+				"tokenObj"
+			],
+			[
+				"el",
+				"elForm"
+			],
+			[
+				"dev",
+				"deviceaddress"
+			],
+			[
+				"set",
+				"setPath"
+			],
+			[
+				"j",
+				"jsonSettings"
+			],
+			[
+				"val",
+				"value"
+			],
+			[
+				"else",
+				"elementSettings"
+			],
+			[
+				"it",
+				"items"
+			],
+			[
+				"res",
+				"result"
+			],
+			[
+				"mult",
+				"multi"
+			],
+			[
+				"redi",
+				"redisClient"
+			],
+			[
+				"lo",
+				"logc"
+			],
+			[
+				"p",
+				"parse"
+			],
+			[
+				"json",
+				"JSON"
+			],
+			[
+				"tr",
+				"training"
+			],
+			[
+				"background",
+				"background-color"
+			],
+			[
+				"trans",
+				"transparent"
+			],
+			[
+				"stud",
+				"studio_id"
+			],
+			[
+				"margin",
+				"margin: margin: T R B L"
+			],
+			[
+				"is",
+				"isConnected"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/User/CoffeeScript-MP.sublime-build",
+	"command_palette":
+	{
+		"height": 49.0,
+		"selected_items":
+		[
+			[
+				"forma",
+				"Format: Javascript"
+			],
+			[
+				"js",
+				"Format: Javascript"
+			],
+			[
+				"jav",
+				"Format: Javascript"
+			],
+			[
+				"ja",
+				"Format: Javascript"
+			],
+			[
+				"java",
+				"Format: Javascript"
+			],
+			[
+				"for",
+				"Format: Javascript"
+			],
+			[
+				"Pac ",
+				"Package Control: Install Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"form",
+				"Format: Javascript"
+			],
+			[
+				"the",
+				"Themr: Default"
+			],
+			[
+				"The",
+				"Themr: Nil"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			],
+			[
+				"For",
+				"Format: Javascript"
+			],
+			[
+				"pack",
+				"Package Control: Install Package"
+			],
+			[
+				"sho",
+				"Show TODOs in project and open files"
+			],
+			[
+				"show",
+				"Show TODOs in project and open files"
+			],
+			[
+				"shoe",
+				"Show TODOs in project and open files"
+			],
+			[
+				"sh",
+				"Show TODOs in project and open files"
+			],
+			[
+				"sho	",
+				"Show TODOs in project and open files"
+			],
+			[
+				"how",
+				"Show TODOs in project and open files"
+			],
+			[
+				"Show",
+				"Show TODOs in project and open files"
+			],
+			[
+				"Pack",
+				"Package Control: Install Package"
+			],
+			[
+				"html",
+				"Html Export: Current File"
+			],
+			[
+				"Pa",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 579.0
+	},
+	"console":
+	{
+		"height": 436.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": true,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/devices-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/apicrud_tree.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/apicrud.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/templates-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/activities-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/daendpoint-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/package.json",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/nodes-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/apibase.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/lib/modelfactory.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/trainings-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/plans-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/nodegroups-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/studio-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/traininglogs-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/polls-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/useralerts-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/lua_getactiveuser.lua.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/user-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/config/config_default.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/userstats.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/config/config_dev.json",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/usersatdevices-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/lua_getcurrentuserdevice.lua.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/tokens-api.coffee",
+		"/Users/mathiaspeter/Desktop/milon_1_1.sql",
+		"/Users/mathiaspeter/Sites/mysql/package.json",
+		"/Users/mathiaspeter/Sites/mysql/lib/mysql/client.js",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/mysql/lib/mysql/client.js",
+		"/Users/mathiaspeter/Sites/mymilon/_src/lib/datamodel.coffee",
+		"/Users/mathiaspeter/Library/Application Support/Sublime Text 2/Packages/User/Default (OSX).sublime-keymap",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/apicrud_dynamo.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/config/dynamo_tables.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/grunt.js",
+		"/Users/mathiaspeter/Sites/mymilon/lib/modelfactory.js",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/contract-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/actionlog-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/index.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/simple-dynamo/node_modules/dynamo/lib/Value.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/daendpoint-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/redis/test.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/user-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/test.lua.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/test.lua.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/test.lua",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/test.lua",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/nodegroups-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/_src/modules/work/apibase.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/lib/modelfactory.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/apicrud.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/nodegroups-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/daendpoint-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/pollvotes-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/vital-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/user-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/auth/user-api.coffee",
+		"/Users/mathiaspeter/Sites/milonst/modules/deviceapi_runner.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/data.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/config/config_default.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/config.json",
+		"/Users/mathiaspeter/Sites/mymilon/config/config_amazon.json",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/milon-modules/lib/workercreator-sqs.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/servosettings-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/powersettings-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/traininglogs-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/tokens-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/plans-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/contract-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/apicrud.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/polls-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/lib/datamodel.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/apikeys-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/studio-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/uservotes-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/login.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/auth/news-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/usersatdevices-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/apikeys-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/lib/configurator.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/apibase.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/auth/apitunnel.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/auth/apibase.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/calendarcalc.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/simple-dynamo/lib/dynamo/attributes.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/config/config_default.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/studio-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/apicrud_tree.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/templates-api.coffee",
+		"/Users/mathiaspeter/Sites/milonst/modules/care/rights.coffee",
+		"/Users/mathiaspeter/Sites/milonst/modules/care/apitunnel.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/activities-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/news-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/news-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/milon-modules/lib/useralerts.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/milon-modules/lib/logger.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/userstats.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/userstats.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/loguserstats.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/usersatdevices-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/messages-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/polls-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/messages-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/redis/index.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/tags-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/config/dynamo_tables.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/apicrud_dynamo.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/www.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/generatedlog.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/README.md",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/milon-modules/lib/aws.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/config_mymilon.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/apicrud_redis.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/auth/index.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/index.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/trainings-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/devices-api.coffee",
+		"/Users/mathiaspeter/Downloads/log.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/config.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/activities-api.js",
+		"/Users/mathiaspeter/Sites/mymilon/modules/auth/traininglogs-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/milon-modules/lib/datamodel.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/milon-modules/lib/utils.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/milon-modules/lib/modelfactory.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/auth/base-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/modules/work/base-api.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/simple-dynamo/node_modules/dynamo/lib/Item.js",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/simple-dynamo/lib/dynamo/table.coffee",
+		"/Users/mathiaspeter/Sites/mymilon/node_modules/simple-dynamo/node_modules/dynamo/lib/Update.js"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+			"/Users/mathiaspeter/Sites/mymilon/_src",
+			"/Users/mathiaspeter/Sites/mymilon/_src/modules/work",
+			"/Users/mathiaspeter/Sites/mymilon/_src",
+			"/Users/mathiaspeter/Sites/mymilon/_src/modules/work",
+			"/Users/mathiaspeter/Sites/mymilon/_src, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/node_modules/redis",
+			"/Users/mathiaspeter/Sites/mymilon/node_modules/hiredis",
+			"/Users/mathiaspeter/Sites/mymilon, /Users/mathiaspeter/Sites/milonst, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work",
+			"/Users/mathiaspeter/Sites/mymilon,/Users/mathiaspeter/Sites/mymilon, /Users/mathiaspeter/Sites/milon_modules, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon,/Users/mathiaspeter/Sites/mymilon, /Users/mathiaspeter/Sites/milon_modules *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon, /Users/mathiaspeter/Sites/milonst, /Users/mathiaspeter/Sites/mymilon/milon_modules, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules",
+			"/Users/mathiaspeter/Sites/mymilon, *.js",
+			"/Users/mathiaspeter/Sites/mymilon",
+			"/Users/mathiaspeter/Sites/mymilon,*.js",
+			"/Users/mathiaspeter/Sites/mymilon, *.js",
+			"/Users/mathiaspeter/Sites/mymilon",
+			"/Users/mathiaspeter/Sites/mymilon, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon",
+			"/Users/mathiaspeter/Sites/mymilon, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work, *.coffee",
+			"*.coffee,<open files>",
+			"/Users/mathiaspeter/Sites/mymilon, *.coffee",
+			"<open files>",
+			"",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon",
+			"/Users/mathiaspeter/Sites/mymilon/modules",
+			"/Users/mathiaspeter/Sites/mymilon, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work",
+			"/Users/mathiaspeter/Sites/mymilon/modules/auth, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules/auth",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules",
+			"/Users/mathiaspeter/Sites/mymilon, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work",
+			"/Users/mathiaspeter/Sites/mymilon/modules",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work",
+			"/Users/mathiaspeter/Sites/mymilon/modules/auth",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work",
+			"/Users/mathiaspeter/Sites/milonst/modules/care",
+			"/Users/mathiaspeter/Sites/mymilon/static/web/css",
+			"/Users/mathiaspeter/Sites/milonst/modules",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work",
+			"/Users/mathiaspeter/Sites/mymilon/modules",
+			"/Users/mathiaspeter/Sites/mymilon/test/, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/modules/, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon/node_modules/mocha/lib",
+			"/Users/mathiaspeter/Sites/mymilon/modules/work",
+			"/Users/mathiaspeter/Sites/mymilon/modules",
+			"/Users/mathiaspeter/Sites/mymilon/modules, *.coffee",
+			"/Users/mathiaspeter/Sites/mymilon,-/Users/mathiaspeter/Sites/mymilon/mode_modules,*.coffee",
+			"/Users/mathiaspeter/Sites/mymilon, *.coffee, -node_modules/",
+			"/Users/mathiaspeter/Sites/mymilon,*.coffee,-node_modules",
+			"/Users/mathiaspeter/Sites/mymilon,*.coffee",
+			"/Users/mathiaspeter/Sites/milonst/modules",
+			"/Users/mathiaspeter/Sites/milonst",
+			"/Users/mathiaspeter/Sites/milonst,*.coffee",
+			"/Users/mathiaspeter/Sites/milonst/",
+			"/Users/mathiaspeter/Sites/milonst/static/html/snippets/users/plans",
+			"/Users/mathiaspeter/Sites/milonst/modules, *.coffee",
+			"/Users/mathiaspeter/Sites/milonst/modules",
+			"/Users/mathiaspeter/Sites/milonst/static",
+			"/Users/mathiaspeter/Sites/milonst/, *.coffee",
+			"/Users/mathiaspeter/Sites/milonst/static/js",
+			"/Users/mathiaspeter/Sites/milonst/static/html/snippets",
+			"<open files>",
+			"/Users/mathiaspeter/Sites/milonst/,-/node_modules,-*.json",
+			"/Users/mathiaspeter/Sites/milonst/,-/node_modules,-*.json,-*.js,-*.html",
+			"/Users/mathiaspeter/Sites/milonst/,-/node_modules,-*.json,-*.js",
+			"/Users/mathiaspeter/Sites/milonst/,-/node_modules,-*.json",
+			"/Users/mathiaspeter/Sites/milonst/,-/node_modules",
+			"/Users/mathiaspeter/Sites/milonst/",
+			"/Users/mathiaspeter/Sites/milonst/,*.styl, *.coffee, *.ejs",
+			"/Users/mathiaspeter/Sites/milonst/static/,*.styl, *.coffee, *.ejs",
+			"/Users/mathiaspeter/Sites/milonst/static/css,*.styl",
+			"/Users/mathiaspeter/Sites/milonst/static/css",
+			"/Users/mathiaspeter/Sites/milonst/static/,*.coffee,*.ejs",
+			"/Users/mathiaspeter/Sites/milonst/static/,*.coffee",
+			"/Users/mathiaspeter/Sites/milonst/static/*.coffee",
+			"/Users/mathiaspeter/Sites/milonst/static/",
+			"/Users/mathiaspeter/Sites/milonst/static/html/snippets/users/plans",
+			"/Users/mathiaspeter/Sites/milonst,*.coffee,*.ejs,*.styl",
+			"/Users/mathiaspeter/Sites/milonst,*.coffee,*.ejs,*.stylus",
+			"/Users/mathiaspeter/Sites/milonst,*.coffee,*.ejs, *.stylus",
+			"/Users/mathiaspeter/Sites/milonst,*.coffee,*.ejs",
+			"/Users/mathiaspeter/Sites/milonst,*.coffee, *.ejs",
+			"/Users/mathiaspeter/Sites/milonst,*.coffee",
+			"/Users/mathiaspeter/Sites/milonst",
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"### ",
+			"####",
+			"###",
+			"addedtraininglog",
+			"userstats",
+			"addedtraininglog",
+			"_updateRemainingContingent",
+			"setnextitem",
+			"getnewslist",
+			"_createStudioAdminUser",
+			"newsid",
+			"oldsid",
+			"original",
+			"_cloneModify",
+			"node_id",
+			"nodeids",
+			"nodes",
+			"modBodyNode",
+			"aFns",
+			"modBodyNode",
+			"node_id",
+			"nid",
+			"nodeids",
+			"_getCloneModBody",
+			"modBodyNode",
+			"node_id",
+			"nid",
+			"nodeids",
+			"async",
+			"jsonreplace",
+			"org",
+			"datas",
+			"_modelHandler",
+			"_getBody",
+			"find",
+			"Find",
+			"FIND",
+			"find",
+			"copy",
+			"jsonreplace",
+			"_changeTemplateBeforeExec",
+			"devicetype_id\":16",
+			"_create",
+			"_afterGenerateFromTemplate",
+			"_processSubTemplates",
+			"\"_id\": 31586",
+			"\"nodegroup_id\": 2,",
+			"\"_id\": 39275",
+			"nodegroup_id",
+			"_afterGenerateFromTemplate",
+			"_processSubTemplates",
+			"_query",
+			"_processSubTemplates",
+			"_generateFromTemplate",
+			"_processSubTemplates",
+			"_generateTemplateData",
+			"user_id",
+			"_afterGenerateFromTemplate",
+			"_generateTemplateData",
+			"_generateFromTemplate",
+			"_changeTemplateBeforeExec",
+			"getdevicesettings",
+			"publishuseralert",
+			"user_id",
+			"params",
+			"publishuseralert",
+			".exec",
+			"userstatus",
+			"file",
+			"Date",
+			"fromTime",
+			"cb",
+			"toTime",
+			"fromTime",
+			"135884",
+			"studio_id",
+			"jsonLo",
+			"getstudiostats",
+			"FORMAT",
+			"format",
+			"_calcDestroyTime",
+			"_deactivate",
+			"deactivate",
+			"t: { \"<\": params.until or 0 }",
+			"\">\"",
+			" \"==\"",
+			"==\"",
+			" }",
+			"attrs",
+			"_params",
+			"console",
+			"())",
+			"?\n",
+			"details",
+			"_handleError",
+			"apikey",
+			"ApiKey",
+			"apikey",
+			"ApiKeys",
+			"tupple",
+			"async",
+			"news",
+			"_range",
+			"key",
+			"_r",
+			"contracts",
+			"rem",
+			"console",
+			"\"13",
+			") ",
+			"\n",
+			"\n\n",
+			"\n",
+			"studio_id",
+			"async",
+			"event",
+			"EVENT",
+			"event",
+			"ARGV",
+			"console",
+			"ERRORS",
+			"passed-empty",
+			"_generalReturnObject",
+			"getstudionodes",
+			"passed-empty",
+			"getstudionodes",
+			"ARGV",
+			"each"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": true,
+		"regex": false,
+		"replace_history":
+		[
+			"\\t",
+			"cdn.milon.com",
+			"\\t",
+			"",
+			"*$&*",
+			"",
+			"it '",
+			"\\n",
+			"\\r",
+			"\\t",
+			"_.string.strRight",
+			"_.string.strLeft",
+			"_.string.trim",
+			"",
+			", ",
+			"\\t#     # ",
+			"\\t#     #",
+			"",
+			"  ",
+			"	#       #",
+			"# ",
+			"",
+			"\\t",
+			" ",
+			"\\t",
+			"= ",
+			"",
+			"navigate",
+			"reset",
+			".",
+			"",
+			"\\t",
+			"	",
+			"											<div class=\"actions actionsbottom\">",
+			"											<div class=\"actions actions-bottom\">",
+			"\\t",
+			"\"$&\"",
+			"\\n//",
+			"minmaxvalue",
+			"\"$&\":",
+			"$&",
+			"			\"_t\": 				{ name: \"_t\",			",
+			"			\"_t\": 				{ name: \"_t\",		",
+			"			\"_u\": 				{ name: \"_u\",	",
+			"			\"_t\": 				{ name: \"_t\"",
+			"			\"_t\": 			{ name: \"_t\"",
+			"			\"_t\": 		{ name: \"_t\"",
+			",",
+			",\\n",
+			"\\n",
+			"[host",
+			"- $&  ",
+			"$&  ",
+			"$&",
+			"$",
+			"\\t",
+			"\\n",
+			"\\t",
+			"class=\"content content-",
+			"\\t",
+			" \\t",
+			" ",
+			"\\t",
+			"xxx",
+			"...",
+			"\\t",
+			"   ",
+			"@",
+			"#",
+			"@",
+			"#",
+			"\"",
+			"@"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		},
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 26.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.422771344866,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 281.0
+	},
+	"output.git":
+	{
+		"height": 90.0
+	},
+	"replace":
+	{
+		"height": 62.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"",
+				"modules/workerfactory.coffee"
+			],
+			[
+				"app",
+				"static/js/app/app.coffee"
+			],
+			[
+				"admin",
+				"static/css/admin.styl"
+			],
+			[
+				"tp",
+				"node_modules/mysql/test/simple/test-parser.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 320.0,
+	"status_bar_visible": true
+}

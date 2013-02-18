@@ -1,0 +1,35 @@
+{
+	"author": "mpneuried, <mp@tcs.de> (www.tcs.de)",
+	"name": "tcs_node_mail_client",
+	"description": "TCS node Mail Client",
+	"tags": [ "mail", "service", "send", "template", "simple", "tcs" ],
+	"version": "0.1.0",
+	"homepage": "www.tcs.de",
+	"private": false,
+	"main": "./lib/index.js",
+	"scripts": {
+		"test": "mocha ./test/test.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git@github.com:mpneuried/tcs_mail_node_client.git"
+	},
+	"engines": {
+		"node": "> 0.8.10"
+	},
+	"scripts": {
+		"test": "mocha ./test/test.js"
+	},
+	"dependencies": {
+		"async": "= 0.1.18",
+		"underscore": "= 1.4.2",
+		"request": "2.9.x",
+		"sanitizer": "*"
+	},
+	"devDependencies": {
+		"coffee-script": "*",
+		"should": "*",
+		"grunt-contrib-coffee": "*",
+		"grunt-replace": "*"
+	}
+}

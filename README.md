@@ -9,20 +9,20 @@ It is designed to simplify the requests to the service and provides a usable and
 
 ### Initialize
 
-#### `new MailFactory( appid, sendermail [, config ] )`
+#### `new MailFactory( appid [, config ] )`
 
 Creates the mail factory to send mail via the tcs mail service.
 
 **arguments**
 
 * `appid` *( String )*: The app id to send mails.
-* `sendermail` *( String )*: The sender address.
 * `config` *( Object [ optional ] )*: Configuration object.<a id="factoryconfig"></a>
+* `config.sendermail` *( String )*: The sender address. This could also be defined in server based on the `appid`
 * `config.endpoint` *( String [ optional; default = "http://node.tcs.de/email/send" ] )*: The url to the tcs mail service.
 * `config.security` *( Object [ optional; default = {} ] )*: If there are some security credentials within your configuration put them here.
 * `config.returnPath` *( String [ optional; default = "bounces@tcs.de" ] )*: Adress for returning mails.
-* `config.source` *( String [ optional; default = @sendermail ] )*: Usually this will be the sender mail. But it's possible to us a human friendly naming.
-* `config.replyToAddresses` *( String | Array )*: A single reply address or an array of multiple addresses as standard reply. This could be overwritten by `Mail.reply( mails )`
+* `config.from` *( String [ optional; default = @sendermail ] )*: Usually this will be the sender mail. But it's possible to us a human friendly naming.
+* `config.reply` *( String | Array )*: A single reply address or an array of multiple addresses as standard reply. This could be overwritten by `Mail.reply( mails )`* 
 * `config.charset` *( String [ optional; default = "utf-8" ] )*: General charset. Changing this config will effect all charset configurations.
 * `config.charsetHtml` *( String [ optional; default = "utf-8" ] )*: Html charset. Will only be send to server if not `utf-8`
 * `config.charsetText` *( String [ optional; default = "utf-8" ] )*: Html charset. Will only be send to server if not `utf-8`
@@ -164,7 +164,7 @@ Set the subject of this mail. If set to null subject will be cleared
 #### `Mail.reply( mails )`
 
 The Reply addresses the mail answers will send to. If set to null or an empty array the current **REPLY** will be cleared.  
-If this method is not used the standard from `MailFactory.config.replyToAddresses` will be used.
+If this method is not used the standard from `MailFactory.config.reply` will be used.
 
 **arguments**
 
@@ -235,11 +235,11 @@ Destroy the `Mail` object.
 
 ## Example
 
-This is simple a full example to send a mail.
+This is a simple example to send a mail.
 
 ```coffee
 # create the factory
-mailFactory = new MailFactory( "wmshop", "shopbot@webmart.de" )
+mailFactory = new MailFactory( "wmshop" )
 
 # create a mail object
 mail = mailFactory.create()
