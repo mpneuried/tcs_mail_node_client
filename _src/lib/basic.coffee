@@ -51,7 +51,7 @@ module.exports = class Basic extends require('events').EventEmitter
 		if _.isString( err )
 			_err = new Error()
 			_err.name = err
-			_err.message = @_ERRORS?[ err ]?( data ) or "unkown"
+			_err.message = @_ERRORS?[ err ]?( data ) or "no details"
 		else if err instanceof Error
 			_err = err
 			_err.message = @_ERRORS?[ err.name ]?( data ) or err.message
@@ -122,6 +122,15 @@ module.exports = class Basic extends require('events').EventEmitter
 		return
 
 	_validateString: ( type, value, required = false )=>
+		if not value? and not required
+			return
+
+		if not _.isString( value )
+			@_handleError( true, "validation-#{type.toLowerCase()}" ) 
+		
+		return
+
+	_validateCharset: ( type, value, required = false )=>
 		if not value? and not required
 			return
 

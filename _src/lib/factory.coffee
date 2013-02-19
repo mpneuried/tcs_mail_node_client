@@ -1,5 +1,6 @@
 _ = require( "underscore" )
 async = require( "async" )
+request = require( "request" )
 
 Mail = require( "./mail" )
 
@@ -14,7 +15,7 @@ module.exports = class MailFactory extends require( "./basic" )
 			# **sendermail** *String* The sender mail address. This could also be defined in server based on the `appid`
 			sendermail: null
 			# **endpoint** *String* The target url
-			endpoint: "http://node.tcs.de/email/send"
+			endpoint: "http://localhost:3000/email/send"
 			# **security** *Object* The security credentials
 			security: {}
 			# **returnPath** *String* Adress for returning mails
@@ -31,6 +32,8 @@ module.exports = class MailFactory extends require( "./basic" )
 			charsetText: null
 			# **charsetHtml** *String* Html charset. Will only be send to server if not `utf-8`.
 			charsetHtml: null
+			# **simulate** *Boolean* Switch to run factory in simulation mode. Used within test scripts.
+			simulate: false
 
 			# TODO template configuration
 
@@ -44,41 +47,63 @@ module.exports = class MailFactory extends require( "./basic" )
 	# ## public methods
 
 	config: ( config = {} )=>
-
-		_.extend( @_cnf, @_validateConfig( config ) )
+		@_cnf = _.extend( @_cnf, @_validateConfig( config ) ) if config? and not _.isEmpty( config )
 
 		@_cnf
 
 	create: =>
 		id = @_createNewMailID()
 		mailObj = new Mail( id, @ )
-		mailCache[ id ] = mailObj
+		@mailCache[ id ] = mailObj
 
 		@_bindMailEvents( id, mailObj )
 
 		mailObj
 
 	get: ( id )=>
-		mailCache[ id ]
+		@mailCache[ id ]
 
 	each: ( iterator )=>
-		for id, mail of mailCache
+		for id, mail of @mailCache
 			iterator( id, mail )
 		return
 
+	count: =>
+		_.keys( @mailCache ).length
+
 	sendAll: ( callback )=>
-		for id, mail of mailCache
-			afns.push ( cba )-> mail.send( cba )
-			
+		afns = []
+		for id, mail of @mailCache
+			afns.push _.bind( ( ( mail, cba )-> mail.send( cba ) ), @, mail )
+
 		async.series afns, ( err, results )=>
 			if err
-				@_handleError( cb, err )
+				@_handleError( callback, err )
 				return		
-			cb( results )
+			callback( results )
 			return
 		return
 
 	# ## private methods
+	
+	_send: ( mailData, callback )=>
+
+		reqOpt = 
+			url: @_cnf.endpoint
+			method: "POST"
+			json: mailData
+
+		if @_cnf.simulate
+			_.delay( =>
+				console.log "\n\nSIMULATED SEND\nreceiver:", _.compact( _.union( reqOpt.json.email?.ToAddresses, reqOpt.json.email?.CcAddresses, reqOpt.json.email?.BccAddresses ) ).join( ", " ), "\nsubject:", reqOpt.json.email.Subject
+				callback( null, { simulated: true } )
+			, 300 )
+		else
+			console.log "SEND", reqOpt.json
+			request( reqOpt, callback )
+
+		return
+	
 
 	_validateConfig: ( config )=>
 		for key, val of config
@@ -87,9 +112,9 @@ module.exports = class MailFactory extends require( "./basic" )
 				when "reply" then @_validateEmail( "config-#{ key }", val, false, true )
 				when "endpoint" then @_validateUrl( "config-#{ key }", val, true )
 				when "security" then @_validateObject( "config-#{ key }", val )
-				when "charset", "charsetSubject", "charsetText", "charsetHtml" then @_validateString( "config-#{ key }", val )
+				when "charset", "charsetSubject", "charsetText", "charsetHtml" then @_validateCharset( "config-#{ key }", val )
 			
-		return
+		config
 
 	_createNewMailID: =>
 		id = "mid#{ @mailCacheCurrIdx }"
@@ -110,7 +135,7 @@ module.exports = class MailFactory extends require( "./basic" )
 		return
 
 	_destroyMail: ( id )=>
-		mailCache = _.omit( mailCache, id )
+		@mailCache = _.omit( @mailCache, id )
 		return
 
 

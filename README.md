@@ -68,6 +68,15 @@ get a single mail object.
 
 *( Mail )*: A `Mail` object.
 
+#### `.count()`
+
+get the count of open send mails in factory.
+
+**Return**
+
+*( Number )*: The count
+
+
 #### `.each( iterator )`
 
 Loop through all mail objects. 
@@ -114,7 +123,9 @@ Timestamp the `Mail` object has been created. Just to be able to destroy outdate
 
 #### `Mail.to( mails )`
 
-Set the main **TO** addresses. If set to null or an empty array the current **TO** will be cleared.
+Set the main **TO** addresses. If set to `false` the current **TO** will be cleared.
+
+**NOTE: At least one mail in `to`, `cc` or `bcc` has to be set.**
 
 **arguments**
 
@@ -126,7 +137,9 @@ Set the main **TO** addresses. If set to null or an empty array the current **TO
 
 #### `Mail.cc( mails )`
 
-Set the **CC** addresses. If set to null or an empty array the current **CC** will be cleared
+Set the **CC** addresses. If set to `false` the current **CC** will be cleared
+
+**NOTE: At least one mail in `to`, `cc` or `bcc` has to be set.**
 
 **arguments**
 
@@ -138,7 +151,9 @@ Set the **CC** addresses. If set to null or an empty array the current **CC** wi
 
 #### `Mail.bcc( mails )`
 
-Set the **BCC** addresses. If set to null or an empty array the current **BCC** will be cleared
+Set the **BCC** addresses. If set to `false` the current **BCC** will be cleared
+
+**NOTE: At least one mail in `to`, `cc` or `bcc` has to be set.**
 
 **arguments**
 
@@ -149,8 +164,10 @@ Set the **BCC** addresses. If set to null or an empty array the current **BCC** 
 *( Mail )*: The `Mail` object self for chaining.
 
 #### `Mail.subject( subject [, charset ] )`
+  
+Set the subject of this mail.
 
-Set the subject of this mail. If set to null subject will be cleared
+**NOTE: This subject has to be set. otherwise an error will be thrown during send**
 
 **arguments**
 
@@ -163,7 +180,7 @@ Set the subject of this mail. If set to null subject will be cleared
 
 #### `Mail.reply( mails )`
 
-The Reply addresses the mail answers will send to. If set to null or an empty array the current **REPLY** will be cleared.  
+The Reply addresses the mail answers will send to. If set to `false` the current **REPLY** will be cleared.  
 If this method is not used the standard from `MailFactory.config.reply` will be used.
 
 **arguments**
@@ -174,7 +191,7 @@ If this method is not used the standard from `MailFactory.config.reply` will be 
 
 *( Mail )*: The `Mail` object self for chaining.
 
-#### `Mail.return( mail )`
+#### `Mail.returnPath( mail )`
 
 The return address failed mails will bounce to.
 If this method is not used the standard from `MailFactory.config.returnPath` will be used.
