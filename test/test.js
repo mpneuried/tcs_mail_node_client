@@ -878,7 +878,7 @@
         var _this = this;
         mailFactoryB.create().subject("Simple Test").text("TEST").to(_Cnf.realReceiver).send(function(err, result) {
           should.not.exist(err);
-          console.log(result);
+          result.should.have.property("recipients")["with"].be.an["instanceof"](Array).and.include(_Cnf.realReceiver);
           done();
         });
       });

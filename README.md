@@ -34,7 +34,7 @@ Creates the mail factory to send mail via the tcs mail service.
 * `config.charsetSubject` *( String [ optional; default = "utf-8" ] )*: Html charset. Will only be send to server if not `utf-8`
 * `config.simulate` *( Boolean [ optional; default = false] )*: This is just a switch to prevent the final send to the mail service. It's been used to test the module. With this switch you can also turn of mail sending within your dev environment.
 
-**TBD** Template configuraton
+**TODO** Template configuraton
 
 * `config.tmplLanguage` *( String [ optional ] )*: A standard language string like `de_DE` or `en_US` to define the language for using the template. 
 * `config.tmplPath` *( String [ optional ] )*: … 
@@ -238,7 +238,7 @@ The raw mail text to send.
 
 #### `Mail.tmpl( tmplName, data [, language, type ] )`
 
-**Template handling TBD**
+**Template handling ( TODO )**
 
 - Should set html and text at once if defined.
 - Should handle the language
@@ -284,6 +284,10 @@ mail.send ( err )=>
 	console.log( "SUCCESS" )
 	return
 ```
+
+## TODOS
+
+- Implement a template handling solution to automatically generate the subject, html and/or text for a specific language by just call `Mail.tmpl(…).to(…).send( -> )`
 
 ## Ideas
 
