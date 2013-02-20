@@ -5,6 +5,11 @@
 This document describes the client module for the TCS e-mail service.  
 It is designed to simplify the requests to the service and provides a usable and expendable interface to integrate the service as easy as possible.
 
+###Note:
+
+- Regular mail **attachments** to mails are **not possible** because the mails will be signed via the DomainKeys Identified Mail (DKIM) Standard.
+- **Images** within the html need to be defined **as link**. **Base64** images via styles are **not valid**.
+
 ## `MailFactory`
 
 ### Initialize
@@ -27,6 +32,7 @@ Creates the mail factory to send mail via the tcs mail service.
 * `config.charsetHtml` *( String [ optional; default = "utf-8" ] )*: Html charset. Will only be send to server if not `utf-8`
 * `config.charsetText` *( String [ optional; default = "utf-8" ] )*: Html charset. Will only be send to server if not `utf-8`
 * `config.charsetSubject` *( String [ optional; default = "utf-8" ] )*: Html charset. Will only be send to server if not `utf-8`
+* `config.simulate` *( Boolean [ optional; default = false] )*: This is just a switch to prevent the final send to the mail service. It's been used to test the module. With this switch you can also turn of mail sending within your dev environment.
 
 **TBD** Template configuraton
 
@@ -277,5 +283,8 @@ mail.send ( err )=>
 		return
 	console.log( "SUCCESS" )
 	return
-
 ```
+
+## Ideas
+
+- Add Attachments as S3 link

@@ -12,7 +12,9 @@
   Mail = require("../lib/index").mail;
 
   _Cnf = {
-    realReceiver: "mp@tcs.de"
+    realReceiver: "mp@tcs.de",
+    realCcReceiver: "pl@tcs.de",
+    realBccReceiver: "mp+bcc@tcs.de"
   };
 
   randRange = function(lowVal, highVal) {
@@ -491,7 +493,7 @@
       it('add 4 mails', function(done) {
         var i, _i;
         for (i = _i = 0; _i <= 3; i = ++_i) {
-          mails.push(mailFactoryA.create().subject("TEST " + i).to("test" + i + "@tcs.de"));
+          mails.push(mailFactoryA.create().subject("TEST " + i).text("CONTENT " + i).to("test" + i + "@tcs.de"));
         }
         mailFactoryA.count().should.equal(mails.length);
         done();
@@ -499,6 +501,7 @@
       it('send all mails', function(done) {
         var _this = this;
         mailFactoryA.sendAll(function(err) {
+          should.not.exist(err);
           mailFactoryA.count().should.equal(0);
           mails = [];
           done();
@@ -871,10 +874,11 @@
         mailFactoryB.should.be.an.instanceOf(MailFactory);
         done();
       });
-      it('create and send mail - only bcc', function(done) {
+      it('create and send mail - simple', function(done) {
         var _this = this;
-        mailFactoryB.create().subject("Simple Test").text("TEST").to(_Cnf.realReceiver).send(function(err) {
+        mailFactoryB.create().subject("Simple Test").text("TEST").to(_Cnf.realReceiver).send(function(err, result) {
           should.not.exist(err);
+          console.log(result);
           done();
         });
       });
@@ -894,11 +898,36 @@
           done();
         });
       });
-      it('create and send mail - only bcc', function(done) {
+      it('create and send mail - missing content', function(done) {
         var _this = this;
-        mailFactoryB.create().subject("only bcc receiver").bcc(_Cnf.realReceiver).send(function(err) {
-          should.not.exist(err);
+        mailFactoryB.create().subject("missing content").bcc(_Cnf.realReceiver).send(function(err, result) {
+          should.exist(err);
+          err.should.have.property("name")["with"].be.a("string").and.equal("validation-mail-content-missing");
           done();
+        });
+      });
+      it('create and send mail - with html content', function(done) {
+        var _this = this;
+        mailFactoryB.create().subject("HTML TEST").html("<html><header><style>h1{color:#f00;}</style></header><body><h1 class=\"test\">Simple html content</h1><p>Test the sending of mails</p></html></body>").to(_Cnf.realReceiver).send(function(err, result) {
+          should.not.exist(err);
+          result.should.have.property("recipients")["with"].be.an["instanceof"](Array).and.include(_Cnf.realReceiver);
+          done();
+        });
+      });
+      it('create and send mail - with large html content', function(done) {
+        fs.readFile('./test/data/html_example.html', function(err, file) {
+          var _val,
+            _this = this;
+          if (err) {
+            throw err;
+            return;
+          }
+          _val = file.toString("utf-8");
+          mailFactoryB.create().subject("TCS E-Mail Node Client").html(_val).to(_Cnf.realReceiver).bcc(_Cnf.realCcReceiver).send(function(err, result) {
+            should.not.exist(err);
+            result.should.have.property("recipients")["with"].be.an["instanceof"](Array).and.include(_Cnf.realReceiver);
+            done();
+          });
         });
       });
     });

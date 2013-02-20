@@ -26,16 +26,6 @@ module.exports = class Mail extends require( "./basic" )
 			return
 		return
 
-	_handleSend: ( callback )=>
-		return ( err, mailReturn )=>
-			if err
-				@emit( "send.error", err )
-				@_handleError( callback, err )
-				return
-
-			@emit( "send.success", mailReturn )
-			callback( null, mailReturn )
-			return
 
 	destroy: =>
 
@@ -167,6 +157,11 @@ module.exports = class Mail extends require( "./basic" )
 			@_handleError( cb, "validation-mail-receiver-missing" )
 			return
 
+		# check for content in text or html
+		if ( not attrs?.text? or attrs?.text.length <= 0 ) and ( not attrs?.html? or attrs?.html.length <= 0 )
+			@_handleError( cb, "validation-mail-content-missing" )
+			return
+
 		# do the conversion to the structure the service requires
 		
 		factoryConf = @factory.config()
@@ -214,10 +209,44 @@ module.exports = class Mail extends require( "./basic" )
 		cb( null, serviceData )
 		return
 
+	_handleSend: ( callback )=>
+		return ( err, mailReturn )=>
+			if err
+				@emit( "send.error", err )
+				@_handleError( callback, err )
+				return
+			else if mailReturn.statusCode isnt 200
+				_err = @_decodeError( mailReturn.body )
+				@emit( "send.error", _err )
+				@_handleError( callback, _err )
+				return
+
+			_ret = @_decodeReturn( mailReturn.body )
+			@emit( "send.success", _ret )
+			callback( null, _ret )
+			return
+
+	_decodeError: ( raw )=>
+		ret = raw?.Body?.ErrorResponse?.Error
+
+		if ret
+			ret
+		else
+			raw	
+
+	_decodeReturn: ( raw )=>
+		ret = {}
+
+		ret.recipients = raw.recipients or null
+		ret.recipients_blacklisted = raw.recipients_blacklisted  or null
+		if ret
+			ret
+		else
+			raw	
+
 	# # Errors detail helper
 	ERRORS: =>
 		_.extend super, 
-			# config 
 			"validation-mail-to": "The given `to` contains one ore more invalid addresses"
 			"validation-mail-cc": "The given `cc` contains one ore more invalid addresses"
 			"validation-mail-bcc": "The given `bcc` contains one ore more invalid addresses"
@@ -231,3 +260,4 @@ module.exports = class Mail extends require( "./basic" )
 			"validation-mail-subject-charset": "The given charset for the subject is not a string"
 			"validation-mail-text-charset": "The given charset for the text is not a string"
 			"validation-mail-html-charset": "The given charset for the html is not a string"
+			"validation-mail-content-missing": "You have to define a content as `html and/or `text`"

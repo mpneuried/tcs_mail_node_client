@@ -80,7 +80,7 @@ module.exports = class MailFactory extends require( "./basic" )
 			if err
 				@_handleError( callback, err )
 				return		
-			callback( results )
+			callback( null, results )
 			return
 		return
 
@@ -95,11 +95,12 @@ module.exports = class MailFactory extends require( "./basic" )
 
 		if @_cnf.simulate
 			_.delay( =>
-				console.log "\n\nSIMULATED SEND\nreceiver:", _.compact( _.union( reqOpt.json.email?.ToAddresses, reqOpt.json.email?.CcAddresses, reqOpt.json.email?.BccAddresses ) ).join( ", " ), "\nsubject:", reqOpt.json.email.Subject
-				callback( null, { simulated: true } )
+				_recipients = _.compact( _.union( reqOpt.json.email?.ToAddresses, reqOpt.json.email?.CcAddresses, reqOpt.json.email?.BccAddresses ) )
+				console.log "\n\nSIMULATED SEND\nreceiver:", _recipients.join( ", " ), "\nsubject:", reqOpt.json.email.Subject
+				callback( null, { statusCode: 200, body: { simulated: true, recipients: _recipients } } )
 			, 300 )
 		else
-			console.log "SEND", reqOpt.json
+			#console.log "SEND", reqOpt.json
 			request( reqOpt, callback )
 
 		return
