@@ -1,0 +1,446 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Tcs mail node client by mpneuried</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Tcs mail node client</h1>
+        <p>TCS mail - node client</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/mpneuried/tcs_mail_node_client" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/mpneuried/tcs_mail_node_client/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/mpneuried/tcs_mail_node_client/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="tcs-e-mail-node-client" class="anchor" href="#tcs-e-mail-node-client"><span class="octicon octicon-link"></span></a>TCS E-Mail Node Client</h1>
+
+<hr><p>This document describes the client module for the TCS e-mail service.<br>
+It is designed to simplify the requests to the service and provides a usable and expendable interface to integrate the service as easy as possible.</p>
+
+<h3>
+<a name="note" class="anchor" href="#note"><span class="octicon octicon-link"></span></a>Note:</h3>
+
+<ul>
+<li>Regular mail <strong>attachments</strong> to mails are <strong>not possible</strong> because the mails will be signed via the DomainKeys Identified Mail (DKIM) Standard.</li>
+<li>
+<strong>Images</strong> within the html need to be defined <strong>as link</strong>. <strong>Base64</strong> images via styles are <strong>not valid</strong>.</li>
+</ul><h2>
+<a name="mailfactory" class="anchor" href="#mailfactory"><span class="octicon octicon-link"></span></a><code>MailFactory</code>
+</h2>
+
+<h3>
+<a name="initialize" class="anchor" href="#initialize"><span class="octicon octicon-link"></span></a>Initialize</h3>
+
+<h4>
+<a name="new-mailfactory-appid--config--" class="anchor" href="#new-mailfactory-appid--config--"><span class="octicon octicon-link"></span></a><code>new MailFactory( appid [, config ] )</code>
+</h4>
+
+<p>Creates the mail factory to send mail via the tcs mail service.</p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>appid</code> <em>( String )</em>: The app id to send mails.</li>
+<li>
+<code>config</code> <em>( Object [ optional ] )</em>: Configuration object.<a></a>
+</li>
+<li>
+<code>config.sendermail</code> <em>( String )</em>: The sender address. This could also be defined in server based on the <code>appid</code>
+</li>
+<li>
+<code>config.endpoint</code> <em>( String [ optional; default = "<a href="http://node.tcs.de/email/send">http://node.tcs.de/email/send</a>" ] )</em>: The url to the tcs mail service.</li>
+<li>
+<code>config.security</code> <em>( Object [ optional; default = {} ] )</em>: If there are some security credentials within your configuration put them here. Usually Security is done by a <code>apikey</code> key or by using an ip filter within the server.</li>
+<li>
+<code>config.returnPath</code> <em>( String [ optional; default = "<a href="mailto:bounces@tcs.de">bounces@tcs.de</a>" ] )</em>: Adress for returning mails.</li>
+<li>
+<code>config.from</code> <em>( String [ optional; default = @sendermail ] )</em>: Usually this will be the sender mail. But it's possible to us a human friendly naming.</li>
+<li>
+<code>config.reply</code> <em>( String | Array )</em>: A single reply address or an array of multiple addresses as standard reply. This could be overwritten by <code>Mail.reply( mails )</code>* </li>
+<li>
+<code>config.charset</code> <em>( String [ optional; default = "utf-8" ] )</em>: General charset. Changing this config will effect all charset configurations.</li>
+<li>
+<code>config.charsetHtml</code> <em>( String [ optional; default = "utf-8" ] )</em>: Html charset. Will only be send to server if not <code>utf-8</code>
+</li>
+<li>
+<code>config.charsetText</code> <em>( String [ optional; default = "utf-8" ] )</em>: Html charset. Will only be send to server if not <code>utf-8</code>
+</li>
+<li>
+<code>config.charsetSubject</code> <em>( String [ optional; default = "utf-8" ] )</em>: Html charset. Will only be send to server if not <code>utf-8</code>
+</li>
+<li>
+<code>config.simulate</code> <em>( Boolean [ optional; default = false] )</em>: This is just a switch to prevent the final send to the mail service. It's been used to test the module. With this switch you can also turn of mail sending within your dev environment.</li>
+</ul><p><strong>TODO</strong> Template configuraton</p>
+
+<ul>
+<li>
+<code>config.tmplLanguage</code> <em>( String [ optional ] )</em>: A standard language string like <code>de_DE</code> or <code>en_US</code> to define the language for using the template. </li>
+<li>
+<code>config.tmplPath</code> <em>( String [ optional ] )</em>: … </li>
+<li>
+<code>config.tmplType</code> <em>( String [ optional ] )</em>: … </li>
+</ul><h3>
+<a name="methods" class="anchor" href="#methods"><span class="octicon octicon-link"></span></a>Methods</h3>
+
+<h4>
+<a name="config-config-" class="anchor" href="#config-config-"><span class="octicon octicon-link"></span></a><code>.config( config )</code>
+</h4>
+
+<p>Change the configuration in operating.</p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>config</code> <em>( Object [ optional ] )</em>: Configuration object. Details see <a href="#factoryconfig">factory config</a>
+</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Object )</em>: the current configuration</p>
+
+<h4>
+<a name="create" class="anchor" href="#create"><span class="octicon octicon-link"></span></a><code>.create()</code>
+</h4>
+
+<p>create and return a new <code>Mail</code> object. This is used to define the receivers content and at least send the email.</p>
+
+<p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: The Mail object as described <a href="#mailobj">here</a> </p>
+
+<h4>
+<a name="get-id-" class="anchor" href="#get-id-"><span class="octicon octicon-link"></span></a><code>.get( id )</code>
+</h4>
+
+<p>get a single mail object.</p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>id</code> <em>( String )</em>: The mail id.</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: A <code>Mail</code> object.</p>
+
+<h4>
+<a name="count" class="anchor" href="#count"><span class="octicon octicon-link"></span></a><code>.count()</code>
+</h4>
+
+<p>get the count of open send mails in factory.</p>
+
+<p><strong>Return</strong></p>
+
+<p><em>( Number )</em>: The count</p>
+
+<h4>
+<a name="each-iterator-" class="anchor" href="#each-iterator-"><span class="octicon octicon-link"></span></a><code>.each( iterator )</code>
+</h4>
+
+<p>Loop through all mail objects. </p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>iterator</code> <em>( Function )</em>: Iteration method with the arguments</li>
+</ul><p><strong>example</strong></p>
+
+<pre><code>MailFactory.each ( id, mailObj )-&gt;
+    ...
+</code></pre>
+
+<h4>
+<a name="sendall-callback-" class="anchor" href="#sendall-callback-"><span class="octicon octicon-link"></span></a><code>.sendAll( callback )</code>
+</h4>
+
+<p>Send all open Mails.</p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>callback</code> <em>( Function )</em>: Callback method called after all mails has been send.</li>
+</ul><h2>
+<a name="mail-object-methods" class="anchor" href="#mail-object-methods"><span class="octicon octicon-link"></span></a><code>Mail</code> Object methods<a></a>
+</h2>
+
+<p>The <code>Mail</code> object can be generated by the <code>MailFactory.mail()</code> Method.
+Within this object you can define all option by using the according method.</p>
+
+<p>If all options has been set you have to call the <code>.send()</code> method to send the mail via the tcs mail service.</p>
+
+<h3>
+<a name="properties" class="anchor" href="#properties"><span class="octicon octicon-link"></span></a>Properties</h3>
+
+<h4>
+<a name="mailid" class="anchor" href="#mailid"><span class="octicon octicon-link"></span></a><code>Mail.id</code>
+</h4>
+
+<p><em>( String )</em></p>
+
+<p>Every mail will get a unique id to be able predefine a lot of mails and send them in bulk.</p>
+
+<h4>
+<a name="mailcreated" class="anchor" href="#mailcreated"><span class="octicon octicon-link"></span></a><code>Mail.created</code>
+</h4>
+
+<p>Timestamp the <code>Mail</code> object has been created. Just to be able to destroy outdated mails later.</p>
+
+<h3>
+<a name="methods-1" class="anchor" href="#methods-1"><span class="octicon octicon-link"></span></a>Methods</h3>
+
+<h4>
+<a name="mailto-mails-" class="anchor" href="#mailto-mails-"><span class="octicon octicon-link"></span></a><code>Mail.to( mails )</code>
+</h4>
+
+<p>Set the main <strong>TO</strong> addresses. If set to <code>false</code> the current <strong>TO</strong> will be cleared.</p>
+
+<p><strong>NOTE: At least one mail in <code>to</code>, <code>cc</code> or <code>bcc</code> has to be set.</strong></p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>mails</code> <em>( String | Array )</em>: A single receiver address or an array of multiple receivers.</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: The <code>Mail</code> object self for chaining.</p>
+
+<h4>
+<a name="mailcc-mails-" class="anchor" href="#mailcc-mails-"><span class="octicon octicon-link"></span></a><code>Mail.cc( mails )</code>
+</h4>
+
+<p>Set the <strong>CC</strong> addresses. If set to <code>false</code> the current <strong>CC</strong> will be cleared</p>
+
+<p><strong>NOTE: At least one mail in <code>to</code>, <code>cc</code> or <code>bcc</code> has to be set.</strong></p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>mails</code> <em>( String | Array )</em>: A single receiver address or an array of multiple receivers.</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: The <code>Mail</code> object self for chaining.</p>
+
+<h4>
+<a name="mailbcc-mails-" class="anchor" href="#mailbcc-mails-"><span class="octicon octicon-link"></span></a><code>Mail.bcc( mails )</code>
+</h4>
+
+<p>Set the <strong>BCC</strong> addresses. If set to <code>false</code> the current <strong>BCC</strong> will be cleared</p>
+
+<p><strong>NOTE: At least one mail in <code>to</code>, <code>cc</code> or <code>bcc</code> has to be set.</strong></p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>mails</code> <em>( String | Array )</em>: A single receiver address or an array of multiple receivers.</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: The <code>Mail</code> object self for chaining.</p>
+
+<h4>
+<a name="mailsubject-subject--charset--" class="anchor" href="#mailsubject-subject--charset--"><span class="octicon octicon-link"></span></a><code>Mail.subject( subject [, charset ] )</code>
+</h4>
+
+<p>Set the subject of this mail.</p>
+
+<p><strong>NOTE: This subject has to be set. otherwise an error will be thrown during send</strong></p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>mails</code> <em>( String )</em>: A subject string to describe the content of this mail</li>
+<li>
+<code>charset</code> <em>( String [ optional, default=config.charsetSubject ] )</em>: Overwrite default charset</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: The <code>Mail</code> object self for chaining.</p>
+
+<h4>
+<a name="mailreply-mails-" class="anchor" href="#mailreply-mails-"><span class="octicon octicon-link"></span></a><code>Mail.reply( mails )</code>
+</h4>
+
+<p>The Reply addresses the mail answers will send to. If set to <code>false</code> the current <strong>REPLY</strong> will be cleared.<br>
+If this method is not used the standard from <code>MailFactory.config.reply</code> will be used.</p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>mails</code> <em>( String | Array )</em>: A single receiver address or an array of multiple receivers.</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: The <code>Mail</code> object self for chaining.</p>
+
+<h4>
+<a name="mailreturnpath-mail-" class="anchor" href="#mailreturnpath-mail-"><span class="octicon octicon-link"></span></a><code>Mail.returnPath( mail )</code>
+</h4>
+
+<p>The return address failed mails will bounce to.
+If this method is not used the standard from <code>MailFactory.config.returnPath</code> will be used.</p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>mails</code> <em>( String )</em>: A single return address.</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: The <code>Mail</code> object self for chaining.</p>
+
+<h4>
+<a name="mailhtml-source--charset--" class="anchor" href="#mailhtml-source--charset--"><span class="octicon octicon-link"></span></a><code>Mail.html( source [, charset ] )</code>
+</h4>
+
+<p>The raw mail html source to send.</p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>source</code> <em>( String )</em>: Mail html source.</li>
+<li>
+<code>charset</code> <em>( String [ optional, default=config.charsetHtml ] )</em>: Overwrite default charset</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: The <code>Mail</code> object self for chaining.</p>
+
+<h4>
+<a name="mailtext-text--charset--" class="anchor" href="#mailtext-text--charset--"><span class="octicon octicon-link"></span></a><code>Mail.text( text [, charset ] )</code>
+</h4>
+
+<p>The raw mail text to send.</p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>source</code> <em>( String )</em>: Mail html source.</li>
+<li>
+<code>charset</code> <em>( String [ optional, default=config.charsetHtml ] )</em>: Overwrite default charset</li>
+</ul><p><strong>Return</strong></p>
+
+<p><em>( Mail )</em>: The <code>Mail</code> object self for chaining.</p>
+
+<h4>
+<a name="mailtmpl-tmplname-data--language-type--" class="anchor" href="#mailtmpl-tmplname-data--language-type--"><span class="octicon octicon-link"></span></a><code>Mail.tmpl( tmplName, data [, language, type ] )</code>
+</h4>
+
+<p><strong>Template handling ( TODO )</strong></p>
+
+<ul>
+<li>Should set html and text at once if defined.</li>
+<li>Should handle the language</li>
+</ul><h4>
+<a name="mailsend-callback-" class="anchor" href="#mailsend-callback-"><span class="octicon octicon-link"></span></a><code>Mail.send( callback )</code>
+</h4>
+
+<p>Send this mail. If there is some missing data a error will be returned.
+after a successful send the <code>Mail</code> object will be destroyed automatically.</p>
+
+<p><strong>arguments</strong></p>
+
+<ul>
+<li>
+<code>callback</code> <em>( Function )</em>: Called after the mail has been send.</li>
+</ul><h4>
+<a name="maildestroy" class="anchor" href="#maildestroy"><span class="octicon octicon-link"></span></a><code>Mail.destroy()</code>
+</h4>
+
+<p>Destroy the <code>Mail</code> object. </p>
+
+<h2>
+<a name="example" class="anchor" href="#example"><span class="octicon octicon-link"></span></a>Example</h2>
+
+<p>This is a simple example to send a mail.</p>
+
+<div class="highlight"><pre><span class="c1"># create the factory</span>
+<span class="nv">mailFactory = </span><span class="k">new</span> <span class="nx">MailFactory</span><span class="p">(</span> <span class="s">"wmshop"</span> <span class="p">)</span>
+
+<span class="c1"># create a mail object</span>
+<span class="nv">mail = </span><span class="nx">mailFactory</span><span class="p">.</span><span class="nx">create</span><span class="p">()</span>
+
+<span class="c1"># set the data</span>
+<span class="nx">mail</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span> <span class="s">"abc@tcs"</span> <span class="p">).</span><span class="nx">cc</span><span class="p">(</span> <span class="p">[</span> <span class="s">"ghi@tcs.de"</span><span class="p">,</span> <span class="s">"def@tcs.de"</span> <span class="p">]</span> <span class="p">)</span>
+
+<span class="nx">mail</span><span class="p">.</span><span class="nx">subject</span><span class="p">(</span> <span class="s">"Test"</span> <span class="p">)</span>
+
+<span class="nx">mail</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span> <span class="s">"&lt;h1&gt;My Test Mail&lt;/h1&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa.&lt;/p&gt;"</span> <span class="p">)</span>
+
+<span class="nx">mail</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span> <span class="s">"My Test Mail\n\nLorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa."</span> <span class="p">)</span>
+
+<span class="c1"># send the mail</span>
+<span class="nx">mail</span><span class="p">.</span><span class="nx">send</span> <span class="nf">( err )=&gt;</span>
+    <span class="k">if</span> <span class="nx">err</span>
+        <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span> <span class="nx">err</span> <span class="p">)</span> 
+        <span class="k">return</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="s">"SUCCESS"</span> <span class="p">)</span>
+    <span class="k">return</span>
+</pre></div>
+
+<h2>
+<a name="changelogs" class="anchor" href="#changelogs"><span class="octicon octicon-link"></span></a>Changelogs</h2>
+
+<h3>
+<a name="011-21-june-2013" class="anchor" href="#011-21-june-2013"><span class="octicon octicon-link"></span></a>0.1.1 <code>21. June 2013</code>
+</h3>
+
+<ul>
+<li>implemented handling of apikey security credentials</li>
+<li>updated tests to load special factory configs</li>
+<li>added grunt mocha test module</li>
+</ul><h2>
+<a name="todos" class="anchor" href="#todos"><span class="octicon octicon-link"></span></a>TODOS</h2>
+
+<ul>
+<li>Implement a template handling solution to automatically generate the subject, html and/or text for a specific language by just call <code>Mail.tmpl(…).to(…).send( -&gt; )</code>
+</li>
+</ul><h2>
+<a name="ideas" class="anchor" href="#ideas"><span class="octicon octicon-link"></span></a>Ideas</h2>
+
+<ul>
+<li>Add Attachments as S3 link</li>
+</ul>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/mpneuried">mpneuried</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
