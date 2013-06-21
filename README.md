@@ -290,6 +290,10 @@ mail.send ( err )=>
 
 ## Changelogs
 
+### 0.1.2 `21. June 2013`
+
+* updated dependencies
+
 ### 0.1.1 `21. June 2013`
 
 * implemented handling of apikey security credentials

@@ -21,9 +21,9 @@
 		"test": "mocha ./test/test.js"
 	},
 	"dependencies": {
-		"async": "= 0.1.18",
-		"underscore": "= 1.4.2",
-		"request": "2.9.x"
+		"async": "*",
+		"underscore": "*",
+		"request": "*"
 	},
 	"devDependencies": {
 		"coffee-script": "*",
