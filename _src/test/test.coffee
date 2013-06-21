@@ -13,7 +13,7 @@ catch _err
 	_factoryB =
 		appid: "wmshop"
 		config:
-			endpoint: "http://54.235.67.151:3030/email/send"
+			endpoint: "http://localhost:3000/email/send"
 
 _Cnf = 
 	realReceiver: "mp@tcs.de"
