@@ -1,7 +1,7 @@
 # TCS E-Mail Node Client
 
-[![dependencies](https://david-dm.org/mpneuried/tcs_mail_node_client.png)](https://david-dm.org/mpneuried/tcs_mail_node_client)
-[![NPM version](https://badge.fury.io/js/tcs_mail_node_client.png)](http://badge.fury.io/js/tcs_mail_node_client)
+[![dependencies](https://david-dm.org/mpneuried/tcs_node_mail_client.png)](https://david-dm.org/mpneuried/tcs_node_mail_client)
+[![NPM version](https://badge.fury.io/js/tcs_node_mail_client.png)](http://badge.fury.io/js/tcs_node_mail_client)
 
 ---
 
