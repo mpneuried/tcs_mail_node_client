@@ -11,8 +11,7 @@ $ cat .gitignore
 .externalToolBuilders
 /node_modules/*
 dump.rdb
-
+/*.js
 .DS_Store
 
-.sublime*
-*.sublime-project
+*.sublime*

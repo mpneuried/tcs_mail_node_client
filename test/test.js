@@ -1,5 +1,5 @@
 (function() {
-  var Mail, MailFactory, fs, randRange, randomString, should, _, _Cnf;
+  var Mail, MailFactory, fs, randRange, randomString, should, _, _Cnf, _err, _factoryB;
 
   fs = require("fs");
 
@@ -11,10 +11,30 @@
 
   Mail = require("../lib/index").mail;
 
+  try {
+    _factoryB = require("../test_config_factoryB.js");
+    console.info("Using config for FactoryB of file `test_config_factoryB.js");
+  } catch (_error) {
+    _err = _error;
+    _factoryB = {
+      appid: "wmshop",
+      config: {
+        endpoint: "http://54.235.67.151:3030/email/send"
+      }
+    };
+  }
+
   _Cnf = {
     realReceiver: "mp@tcs.de",
-    realCcReceiver: "pl@tcs.de",
-    realBccReceiver: "mp+bcc@tcs.de"
+    realCcReceiver: "mp+cc@tcs.de",
+    realBccReceiver: "mp+bcc@tcs.de",
+    factoryA: {
+      appid: "wmshop",
+      config: {
+        simulate: true
+      }
+    },
+    factoryB: _factoryB
   };
 
   randRange = function(lowVal, highVal) {
@@ -58,7 +78,6 @@
       }
       i++;
       randomstring;
-
     }
     return randomstring;
   };
@@ -74,9 +93,7 @@
     mailFactoryA = null;
     describe('initialize & configure', function() {
       it('create new factory', function(done) {
-        mailFactoryA = new MailFactory("wmshop", {
-          simulate: true
-        });
+        mailFactoryA = new MailFactory(_Cnf.factoryA.appid, _Cnf.factoryA.config);
         mailFactoryA.should.be.an.instanceOf(MailFactory);
         done();
       });
@@ -100,7 +117,8 @@
           _cnf = mailFactoryA.config({
             sendermail: "wrongmail"
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-sendermail");
           done();
           return;
@@ -113,7 +131,8 @@
           _cnf = mailFactoryA.config({
             sendermail: ["test@success.de", "check@success.com"]
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-sendermail");
           done();
           return;
@@ -134,7 +153,8 @@
           _cnf = mailFactoryA.config({
             endpoint: "wrongurl"
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-endpoint");
           done();
           return;
@@ -147,22 +167,35 @@
           _cnf = mailFactoryA.config({
             endpoint: ["http://node.tcs.de/email/send", "http://nodetest.tcs.de/email/send"]
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-endpoint");
           done();
           return;
         }
         throw "wrong endpoint not thrown";
       });
+      it('change configuration - security with ignored keys', function(done) {
+        var _cnf;
+        _cnf = mailFactoryA.config({
+          security: {
+            b: "asdf",
+            a: 123
+          }
+        });
+        _cnf.should.have.property("security")["with"].be.a("object").and.eql({});
+        done();
+      });
       it('change configuration - security', function(done) {
         var _cnf;
         _cnf = mailFactoryA.config({
           security: {
-            a: 123
+            apikey: "abcdefg",
+            xxx: 1233
           }
         });
         _cnf.should.have.property("security")["with"].be.a("object").and.eql({
-          a: 123
+          apikey: "abcdefg"
         });
         done();
       });
@@ -172,7 +205,8 @@
           _cnf = mailFactoryA.config({
             security: "123"
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-security");
           done();
           return;
@@ -200,7 +234,8 @@
           _cnf = mailFactoryA.config({
             returnPath: "wrongmail"
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-returnpath");
           done();
           return;
@@ -213,7 +248,8 @@
           _cnf = mailFactoryA.config({
             returnPath: ["test@success.de", "check@success.com"]
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-returnpath");
           done();
           return;
@@ -233,7 +269,8 @@
           _cnf = mailFactoryA.config({
             from: "wrongmail"
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-from");
           done();
           return;
@@ -246,7 +283,8 @@
           _cnf = mailFactoryA.config({
             from: ["test@success.de", "check@success.com"]
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-from");
           done();
           return;
@@ -267,7 +305,8 @@
           _cnf = mailFactoryA.config({
             reply: "wrongmail"
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-reply");
           done();
           return;
@@ -289,7 +328,8 @@
             reply: ["test@success.de", "wrongmail"]
           });
           throw "wrong reply not thrown";
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-reply");
           done();
         }
@@ -316,7 +356,8 @@
           _cnf = mailFactoryA.config({
             charset: 1365
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-charset");
           done();
           return;
@@ -329,7 +370,8 @@
           _cnf = mailFactoryA.config({
             charset: ["ISO-8859-1", "utf-16"]
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-charset");
           done();
           return;
@@ -358,7 +400,8 @@
           _cnf = mailFactoryA.config({
             charsetSubject: 1365
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-charsetsubject");
           done();
           return;
@@ -371,7 +414,8 @@
           _cnf = mailFactoryA.config({
             charsetSubject: ["ISO-8859-1", "utf-16"]
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-charsetsubject");
           done();
           return;
@@ -400,7 +444,8 @@
           _cnf = mailFactoryA.config({
             charsetText: 1365
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-charsettext");
           done();
           return;
@@ -413,7 +458,8 @@
           _cnf = mailFactoryA.config({
             charsetText: ["ISO-8859-1", "utf-16"]
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-charsettext");
           done();
           return;
@@ -442,7 +488,8 @@
           _cnf = mailFactoryA.config({
             charsetHtml: 1365
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-charsethtml");
           done();
           return;
@@ -455,7 +502,8 @@
           _cnf = mailFactoryA.config({
             charsetHtml: ["ISO-8859-1", "utf-16"]
           });
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-config-charsethtml");
           done();
           return;
@@ -541,7 +589,8 @@
         var _to;
         try {
           _to = mailA.to("testAtcs.de");
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-to");
           done();
           return;
@@ -552,7 +601,8 @@
         var _to;
         try {
           _to = mailA.to(["testA@tcs.de", "testBtcs.de", "testC@tcs.de"]);
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-to");
           done();
           return;
@@ -575,7 +625,8 @@
         var _cc;
         try {
           _cc = mailA.cc("testAtcs.de");
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-cc");
           done();
           return;
@@ -586,7 +637,8 @@
         var _cc;
         try {
           _cc = mailA.cc(["testA@tcs.de", "testBtcs.de", "testC@tcs.de"]);
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-cc");
           done();
           return;
@@ -615,7 +667,8 @@
         var _bcc;
         try {
           _bcc = mailA.bcc("testAtcs.de");
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-bcc");
           done();
           return;
@@ -626,7 +679,8 @@
         var _bcc;
         try {
           _bcc = mailA.bcc(["testA@tcs.de", "testBtcs.de", "testC@tcs.de"]);
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-bcc");
           done();
           return;
@@ -663,7 +717,8 @@
         var _subject, _val;
         try {
           mailA.subject(false);
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-subject");
           _val = "<b>This is my html string</b>";
           _subject = mailA.subject();
@@ -686,7 +741,8 @@
         _val = ["my array subject"];
         try {
           mailA.subject(_val);
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-subject");
           done();
           return;
@@ -726,7 +782,8 @@
         _val = ["my array text"];
         try {
           mailA.text(_val);
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-text");
           done();
           return;
@@ -765,7 +822,8 @@
         _val = ["my array html"];
         try {
           mailA.html(_val);
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-html");
           done();
           return;
@@ -805,7 +863,8 @@
         try {
           _reply = mailA.reply("testAtcs.de");
           throw "wrong reply - single not thrown";
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-reply");
           done();
         }
@@ -814,7 +873,8 @@
         var _reply;
         try {
           _reply = mailA.reply(["testA@tcs.de", "testBtcs.de", "testC@tcs.de"]);
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-reply");
           done();
           return;
@@ -837,7 +897,8 @@
         var _returnPath;
         try {
           _returnPath = mailA.returnPath(["testA@tcs.de", "testB@tcs.de", "testC@tcs.de"]);
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-returnpath");
           done();
           return;
@@ -848,7 +909,8 @@
         var _returnPath;
         try {
           _returnPath = mailA.returnPath("testAtcs.de");
-        } catch (_err) {
+        } catch (_error) {
+          _err = _error;
           _err.name.should.equal("validation-mail-returnpath");
           done();
           return;
@@ -870,7 +932,7 @@
       var mailFactoryB;
       mailFactoryB = null;
       it('create new factory', function(done) {
-        mailFactoryB = new MailFactory("wmshop");
+        mailFactoryB = new MailFactory(_Cnf.factoryB.appid, _Cnf.factoryB.config);
         mailFactoryB.should.be.an.instanceOf(MailFactory);
         done();
       });

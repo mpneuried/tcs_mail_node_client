@@ -6,10 +6,25 @@ MailFactory = require("../lib/index")
 
 Mail = require("../lib/index").mail
 
+try
+	_factoryB = require( "../test_config_factoryB.js" )
+	console.info "Using config for FactoryB of file `test_config_factoryB.js"
+catch _err
+	_factoryB =
+		appid: "wmshop"
+		config:
+			endpoint: "http://54.235.67.151:3030/email/send"
+
 _Cnf = 
 	realReceiver: "mp@tcs.de"
-	realCcReceiver: "pl@tcs.de"
+	realCcReceiver: "mp+cc@tcs.de"
 	realBccReceiver: "mp+bcc@tcs.de"
+	factoryA:
+		appid: "wmshop"
+		config:
+			simulate: true
+	factoryB: _factoryB
+		
 
 randRange = ( lowVal, highVal )->
 	Math.floor( Math.random()*(highVal-lowVal+1 ))+lowVal
@@ -51,7 +66,7 @@ describe 'MAIL-FACTORY-TEST', ->
 	describe 'initialize & configure', ->
 
 		it 'create new factory', ( done )->
-			mailFactoryA = new MailFactory( "wmshop", simulate: true )
+			mailFactoryA = new MailFactory( _Cnf.factoryA.appid, _Cnf.factoryA.config )
 
 			mailFactoryA.should.be.an.instanceOf MailFactory
 
@@ -129,10 +144,19 @@ describe 'MAIL-FACTORY-TEST', ->
 			throw "wrong endpoint not thrown"
 			return
 
-		it 'change configuration - security', ( done )->
-			_cnf = mailFactoryA.config( security: { a: 123 } )
+		it 'change configuration - security with ignored keys', ( done )->
+			_cnf = mailFactoryA.config( security: { b: "asdf", a: 123 } )
 
-			_cnf.should.have.property( "security" ).with.be.a( "object" ).and.eql { a: 123 }
+			_cnf.should.have.property( "security" ).with.be.a( "object" ).and.eql {}
+
+			done()
+
+			return
+
+		it 'change configuration - security', ( done )->
+			_cnf = mailFactoryA.config( security: { apikey: "abcdefg", xxx: 1233 } )
+
+			_cnf.should.have.property( "security" ).with.be.a( "object" ).and.eql { apikey: "abcdefg" }
 
 			done()
 
@@ -945,7 +969,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		mailFactoryB = null
 
 		it 'create new factory', ( done )->
-			mailFactoryB = new MailFactory( "wmshop" )
+			mailFactoryB = new MailFactory(  _Cnf.factoryB.appid, _Cnf.factoryB.config  )
 
 			mailFactoryB.should.be.an.instanceOf MailFactory
 

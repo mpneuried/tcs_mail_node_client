@@ -8,6 +8,7 @@ module.exports = class MailFactory extends require( "./basic" )
 
 	mailCache: {}
 	mailCacheCurrIdx: 0
+	_allowedSecurityKeys: [ "apikey" ]
 
 	# ## defaults
 	defaults: =>
@@ -93,6 +94,9 @@ module.exports = class MailFactory extends require( "./basic" )
 			method: "POST"
 			json: mailData
 
+		reqOpt.headers = @_cnf.security
+
+
 		if @_cnf.simulate
 			_.delay( =>
 				_recipients = _.compact( _.union( reqOpt.json.email?.ToAddresses, reqOpt.json.email?.CcAddresses, reqOpt.json.email?.BccAddresses ) )
@@ -112,8 +116,10 @@ module.exports = class MailFactory extends require( "./basic" )
 				when "sendermail", "returnPath" ,"from" then @_validateEmail( "config-#{ key }", val, false, false )
 				when "reply" then @_validateEmail( "config-#{ key }", val, false, true )
 				when "endpoint" then @_validateUrl( "config-#{ key }", val, true )
-				when "security" then @_validateObject( "config-#{ key }", val )
 				when "charset", "charsetSubject", "charsetText", "charsetHtml" then @_validateCharset( "config-#{ key }", val )
+				when "security"
+					@_validateObject( "config-#{ key }", val )
+					config.security = _.pick( config.security, "apikey" )
 			
 		config
 
@@ -146,7 +152,6 @@ module.exports = class MailFactory extends require( "./basic" )
 			# config 
 			"validation-config-sendermail": "The given sendermail is not a valid e-mail"
 			"validation-config-endpoint": "The given endpoint is not a vaild url"
-			"validation-config-security": "The given security credentials are not an object"
 			"validation-config-returnpath": "The given returnPath address is not valid"
 			"validation-config-from": "The given from address is not valid"
 			"validation-config-reply": "The given from contains one ore more invalid addresses"
@@ -154,3 +159,4 @@ module.exports = class MailFactory extends require( "./basic" )
 			"validation-config-charsetsubject": "The given charsetSubject is not a string"
 			"validation-config-charsettext": "The given charsetText is not a string"
 			"validation-config-charsethtml": "The given charsetHtml is not a string"
+			"validation-config-security": "The given security credentials are not an object. Only the keys: `#{ @_allowedSecurityKeys.join( "," ) }` are allowed."

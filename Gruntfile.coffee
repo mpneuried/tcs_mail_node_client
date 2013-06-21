@@ -41,14 +41,24 @@ module.exports = (grunt) ->
 					prefix: "@@"
 					suffix: ''
 
-				files:
-					"lib/": ["lib/index.js"]
+				src: "lib/index.js"
+				dest: ""
+
+		mochacli:
+			options:
+				require: [ "should" ]
+				reporter: "spec"
+				bail: true
+				timeout: 10000
+
+			all: [ "test/test.js" ]
 
 	
 	# Default task.
 	grunt.loadNpmTasks "grunt-contrib-watch"
 	grunt.loadNpmTasks "grunt-contrib-coffee"
 	grunt.loadNpmTasks "grunt-include-replace"
+	grunt.loadNpmTasks "grunt-mocha-cli"
 	grunt.registerTask "reloadPackage", ->
 		grunt.config.set "pkg", require("./package.json")
 		done = @async()
@@ -56,3 +66,4 @@ module.exports = (grunt) ->
 
 	grunt.registerTask "default", "buildall-dev"
 	grunt.registerTask "buildall-dev", "coffee includereplace".split(" ")
+	grunt.registerTask "test", [ "mochacli" ]

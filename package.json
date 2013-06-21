@@ -3,7 +3,7 @@
 	"name": "tcs_node_mail_client",
 	"description": "TCS node Mail Client",
 	"tags": [ "mail", "service", "send", "template", "simple", "tcs" ],
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"homepage": "www.tcs.de",
 	"private": false,
 	"main": "./lib/index.js",
@@ -31,6 +31,7 @@
 		"grunt": "*",
 		"grunt-contrib-watch": "*",
 		"grunt-contrib-coffee": "*",
-		"grunt-include-replace": "*"
+		"grunt-include-replace": "*",
+		"grunt-mocha-cli": "*"
 	}
 }

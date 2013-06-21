@@ -285,6 +285,14 @@ mail.send ( err )=>
 	return
 ```
 
+## Changelogs
+
+### 0.1.0 `21. June 2013`
+
+* implemented handling of apikey security credentials
+* updated tests to load special factory configs
+* added grunt mocha test module
+
 ## TODOS
 
 - Implement a template handling solution to automatically generate the subject, html and/or text for a specific language by just call `Mail.tmpl(…).to(…).send( -> )`
