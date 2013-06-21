@@ -24,7 +24,7 @@ Creates the mail factory to send mail via the tcs mail service.
 * `config` *( Object [ optional ] )*: Configuration object.<a id="factoryconfig"></a>
 * `config.sendermail` *( String )*: The sender address. This could also be defined in server based on the `appid`
 * `config.endpoint` *( String [ optional; default = "http://node.tcs.de/email/send" ] )*: The url to the tcs mail service.
-* `config.security` *( Object [ optional; default = {} ] )*: If there are some security credentials within your configuration put them here.
+* `config.security` *( Object [ optional; default = {} ] )*: If there are some security credentials within your configuration put them here. Usually Security is done by a `apikey` key or by using an ip filter within the server.
 * `config.returnPath` *( String [ optional; default = "bounces@tcs.de" ] )*: Adress for returning mails.
 * `config.from` *( String [ optional; default = @sendermail ] )*: Usually this will be the sender mail. But it's possible to us a human friendly naming.
 * `config.reply` *( String | Array )*: A single reply address or an array of multiple addresses as standard reply. This could be overwritten by `Mail.reply( mails )`* 
@@ -287,7 +287,7 @@ mail.send ( err )=>
 
 ## Changelogs
 
-### 0.1.0 `21. June 2013`
+### 0.1.1 `21. June 2013`
 
 * implemented handling of apikey security credentials
 * updated tests to load special factory configs
