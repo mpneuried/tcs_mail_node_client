@@ -189,22 +189,37 @@ module.exports = class Mail extends require( "./basic" )
 		# set bounce and rely adresses
 		serviceData.email.ReplyToAddresses = ( if _.isArray( attrs.reply ) then attrs.reply else [ attrs.reply ] ) if attrs.reply?
 
-		serviceData.email.ReturnPath = attrs.returnPath if attrs.returnPath?
+		if attrs.returnPath?
+			serviceData.email.ReturnPath = attrs.returnPath 
+		else if factoryConf.returnPath?
+			serviceData.email.ReturnPath = factoryConf.returnPath 
 
 		# set mail subject and content
 		serviceData.email.Subject = attrs.subject
 		if attrs.charsetSubject? and attrs.charsetSubject isnt "UTF-8"
 			serviceData.email.SubjectCharset = attrs.charsetSubject
+		else if factoryConf.charsetSubject? and factoryConf.charsetSubject isnt "UTF-8"
+			serviceData.email.SubjectCharset = factoryConf.charsetSubject
+		else if factoryConf.charset isnt "UTF-8"
+			serviceData.email.SubjectCharset = factoryConf.charset
 
 		if attrs.text?
 			serviceData.email.Text = attrs.text
 			if attrs.charsetText? and attrs.charsetText isnt "UTF-8"
 				serviceData.email.TextCharset = attrs.charsetText
+			else if factoryConf.charsetText? and factoryConf.charsetText isnt "UTF-8"
+				serviceData.email.TextCharset = factoryConf.charsetText
+			else if factoryConf.charset isnt "UTF-8"
+				serviceData.email.TextCharset = factoryConf.charset
 
 		if attrs.html?
 			serviceData.email.Html = attrs.html
 			if attrs.charsetHtml? and attrs.charsetHtml isnt "UTF-8"
 				serviceData.email.HtmlCharset = attrs.charsetHtml
+			else if factoryConf.charsetHtml? and factoryConf.charsetHtml isnt "UTF-8"
+				serviceData.email.HtmlCharset = factoryConf.charsetHtml
+			else if factoryConf.charset isnt "UTF-8"
+				serviceData.email.HtmlCharset = factoryConf.charset
 
 		cb( null, serviceData )
 		return
