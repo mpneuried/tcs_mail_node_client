@@ -289,20 +289,19 @@ mail.send ( err )=>
 ```
 
 ## Changelogs
+|Version|Date|Description|
+|:--:|:--:|:--|
+|0.1.4|2013-11-05|Detailed simulated output|
+|0.1.3|2013-08-12|fixed usage of factory configurations|
+|0.1.2|2013-06-21|updated dependencies|
+|0.1.1|2013-06-21|- implemented handling of apikey security credentials<br/>- updated tests to loady<br/>- special factory configs<br/>- added grunt mocha test module|
 
-### 0.1.3 `12. August 2013`
-
-* fixed usage of factory configurations
-
-### 0.1.2 `21. June 2013`
-
-* updated dependencies
-
-### 0.1.1 `21. June 2013`
-
-* implemented handling of apikey security credentials
-* updated tests to load special factory configs
-* added grunt mocha test module
+## Related Projects
+|Name|Description|
+|:--|:--|
+|[**redis-sessions**](https://github.com/smrchy/redis-sessions)|The redis session module this middleware module is based on|
+|[**tcs_node_auth**](https://github.com/mpneuried/tcs_node_auth)|Authentication module to handle login and register with a integrated mail double-opt-in logic.|
+|[**node-tcs-de**](https://github.com/smrchy/node.tcs.de)|(Private) Sends out an email via Amazon SES.|
 
 ## TODOS
 

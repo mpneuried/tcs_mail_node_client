@@ -100,7 +100,38 @@ module.exports = class MailFactory extends require( "./basic" )
 		if @_cnf.simulate
 			_.delay( =>
 				_recipients = _.compact( _.union( reqOpt.json.email?.ToAddresses, reqOpt.json.email?.CcAddresses, reqOpt.json.email?.BccAddresses ) )
-				console.log "\n\nSIMULATED SEND\nreceiver:", _recipients.join( ", " ), "\nsubject:", reqOpt.json.email.Subject
+				_sout = """
+===========================================
+=              SIMULATED MAIL             =
+===========================================
+    FROM: #{ reqOpt.json.email.ToAddresses.join( ", " ) }
+    REPLYTO: #{ reqOpt.json.email.ReplyToAddresses.join( ", " ) }
+    TO: #{ _recipients.join( ", " ) }
+    SUBJECT: #{ reqOpt.json.email.Subject }
+
+"""
+				if reqOpt.json.email?.Text?.length
+					_sout += """
+--- BODY: text -----------------------------
+#{reqOpt.json.email.Text}
+
+				"""
+				if reqOpt.json.email?.Html?.length
+					_sout += """
+
+--- BODY: html -----------------------------
+#{reqOpt.json.email.Html}
+
+				"""
+				_sout += """
+============================================
+=                  END                     =
+============================================
+
+
+
+				"""
+				console.log _sout
 				callback( null, { statusCode: 200, body: { simulated: true, recipients: _recipients } } )
 			, 300 )
 		else

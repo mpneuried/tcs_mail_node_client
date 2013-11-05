@@ -67,3 +67,4 @@ module.exports = (grunt) ->
 	grunt.registerTask "default", "buildall-dev"
 	grunt.registerTask "buildall-dev", "coffee includereplace".split(" ")
 	grunt.registerTask "test", [ "mochacli" ]
+	grunt.registerTask "btest", [ "buildall-dev", "mochacli" ]
