@@ -291,6 +291,7 @@ mail.send ( err )=>
 ## Changelogs
 |Version|Date|Description|
 |:--:|:--:|:--|
+|0.1.5|2013-11-05|Small bugfix in simulation output|
 |0.1.4|2013-11-05|Detailed simulated output|
 |0.1.3|2013-08-12|fixed usage of factory configurations|
 |0.1.2|2013-06-21|updated dependencies|

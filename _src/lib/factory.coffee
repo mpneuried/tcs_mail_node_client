@@ -104,10 +104,10 @@ module.exports = class MailFactory extends require( "./basic" )
 ===========================================
 =              SIMULATED MAIL             =
 ===========================================
-    FROM: #{ reqOpt.json.email.ToAddresses.join( ", " ) }
-    REPLYTO: #{ reqOpt.json.email.ReplyToAddresses.join( ", " ) }
-    TO: #{ _recipients.join( ", " ) }
-    SUBJECT: #{ reqOpt.json.email.Subject }
+    FROM: #{ reqOpt?.json?.email?.ToAddresses?.join( ", " ) or "-" }
+    REPLYTO: #{ reqOpt?.json?.email?.ReplyToAddresses?.join( ", " ) or "-" }
+    TO: #{ _recipients.join( ", " ) or "-" }
+    SUBJECT: #{ reqOpt?.json?.email?.Subject or "-" }
 
 """
 				if reqOpt.json.email?.Text?.length
