@@ -3,7 +3,7 @@
 	"name": "tcs_node_mail_client",
 	"description": "TCS node Mail Client",
 	"tags": [ "mail", "service", "send", "template", "simple", "tcs" ],
-	"version": "0.1.5",
+	"version": "0.2.0",
 	"homepage": "www.tcs.de",
 	"private": false,
 	"main": "./lib/index.js",

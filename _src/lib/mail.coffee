@@ -88,21 +88,17 @@ module.exports = class Mail extends require( "./basic" )
 		else
 			@attributes.returnPath
 
-	subject: ( subject, charset )=>
+	subject: ( subject )=>
 		if subject?
 
 			@_validateString( "mail-subject", subject, true, true )
 			@attributes.subject = subject
 
-			if charset?
-				@_validateCharset( "mail-subject-charset", charset )
-				@attributes.charsetSubject = charset.toUpperCase()
-
 			@
 		else
 			@attributes.subject
 
-	text: ( text, charset )=>
+	text: ( text )=>
 		if text?
 			if text is false
 				@attributes.text = null
@@ -110,25 +106,17 @@ module.exports = class Mail extends require( "./basic" )
 				@_validateString( "mail-text", text, true, true )
 				@attributes.text = text
 
-			if charset?
-				@_validateCharset( "mail-text-charset", charset )
-				@attributes.charsetText = charset.toUpperCase()
-
 			@
 		else
 			@attributes.text
 
-	html: ( html, charset )=>
+	html: ( html )=>
 		if html?
 			if html is false
 				@attributes.html = null
 			else
 				@_validateString( "mail-html", html, true, true )
 				@attributes.html = html
-
-			if charset?
-				@_validateCharset( "mail-html-charset", charset )
-				@attributes.charsetHtml = charset.toUpperCase()
 
 			@
 		else
@@ -142,7 +130,7 @@ module.exports = class Mail extends require( "./basic" )
 	# ## private methods
 	
 	_getAttributes: =>
-		factoryDefaults = _.pick( @factory.config(), [ "returnPath", "reply", "charset", "charsetSubject", "charsetText", "charsetHtml" ] )
+		factoryDefaults = _.pick( @factory.config(), [ "returnPath", "reply" ] )
 		_.extend( {}, factoryDefaults, @attributes )
 
 	_validateAndConvertAttributes: ( attrs, cb )=>
@@ -196,30 +184,12 @@ module.exports = class Mail extends require( "./basic" )
 
 		# set mail subject and content
 		serviceData.email.Subject = attrs.subject
-		if attrs.charsetSubject? and attrs.charsetSubject isnt "UTF-8"
-			serviceData.email.SubjectCharset = attrs.charsetSubject
-		else if factoryConf.charsetSubject? and factoryConf.charsetSubject isnt "UTF-8"
-			serviceData.email.SubjectCharset = factoryConf.charsetSubject
-		else if factoryConf.charset isnt "UTF-8"
-			serviceData.email.SubjectCharset = factoryConf.charset
 
 		if attrs.text?
 			serviceData.email.Text = attrs.text
-			if attrs.charsetText? and attrs.charsetText isnt "UTF-8"
-				serviceData.email.TextCharset = attrs.charsetText
-			else if factoryConf.charsetText? and factoryConf.charsetText isnt "UTF-8"
-				serviceData.email.TextCharset = factoryConf.charsetText
-			else if factoryConf.charset isnt "UTF-8"
-				serviceData.email.TextCharset = factoryConf.charset
 
 		if attrs.html?
 			serviceData.email.Html = attrs.html
-			if attrs.charsetHtml? and attrs.charsetHtml isnt "UTF-8"
-				serviceData.email.HtmlCharset = attrs.charsetHtml
-			else if factoryConf.charsetHtml? and factoryConf.charsetHtml isnt "UTF-8"
-				serviceData.email.HtmlCharset = factoryConf.charsetHtml
-			else if factoryConf.charset isnt "UTF-8"
-				serviceData.email.HtmlCharset = factoryConf.charset
 
 		cb( null, serviceData )
 		return
@@ -272,7 +242,4 @@ module.exports = class Mail extends require( "./basic" )
 			"validation-mail-subject-missing": "A subject ha to be set"
 			"validation-mail-text": "The given `text` has to be a string"
 			"validation-mail-html": "The given `html` has to be a string"
-			"validation-mail-subject-charset": "The given charset for the subject is not a string"
-			"validation-mail-text-charset": "The given charset for the text is not a string"
-			"validation-mail-html-charset": "The given charset for the html is not a string"
 			"validation-mail-content-missing": "You have to define a content as `html and/or `text`"

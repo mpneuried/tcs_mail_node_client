@@ -279,162 +279,6 @@ describe 'MAIL-FACTORY-TEST', ->
 
 			return
 
-		it 'change configuration - charset', ( done )->
-			_cnf = mailFactoryA.config( charset: "ISO-8859-1" )
-
-			_cnf.should.have.property( "charset" ).with.be.a( "string" ).and.equal "ISO-8859-1"
-
-			done()
-
-			return
-
-		it 'change configuration - charset null', ( done )->
-			_cnf = mailFactoryA.config( charset: null )
-
-			_cnf.should.have.property( "charset" ).with.eql( null )
-			
-			done()
-
-			return
-
-		it 'change configuration - wrong charset', ( done )->
-			try
-				_cnf = mailFactoryA.config( charset: 1365 )
-			catch _err
-				_err.name.should.equal( "validation-config-charset" )
-				done()
-				return
-
-			throw "wrong charset not thrown"
-			return
-
-		it 'change configuration - multiple charsets', ( done )->
-			try
-				_cnf = mailFactoryA.config( charset: [ "ISO-8859-1", "utf-16" ] )
-			catch _err
-				_err.name.should.equal( "validation-config-charset" )
-				done()
-				return
-
-			throw "wrong charset not thrown"
-			return
-
-		it 'change configuration - charsetsubject', ( done )->
-			_cnf = mailFactoryA.config( charsetSubject: "ISO-8859-1" )
-
-			_cnf.should.have.property( "charsetSubject" ).with.be.a( "string" ).and.equal "ISO-8859-1"
-			
-			done()
-
-			return
-
-		it 'change configuration - charsetsubject null', ( done )->
-			_cnf = mailFactoryA.config( charsetSubject: null )
-			_cnf.should.have.property( "charsetSubject" ).with.eql( null )
-			done()
-
-			return
-
-		it 'change configuration - wrong charsetsubject', ( done )->
-			try
-				_cnf = mailFactoryA.config( charsetSubject: 1365 )
-			catch _err
-				_err.name.should.equal( "validation-config-charsetsubject" )
-				done()
-				return
-
-			throw "wrong charsetsubject not thrown"
-			return
-
-		it 'change configuration - multiple charsetsubjects', ( done )->
-			try
-				_cnf = mailFactoryA.config( charsetSubject: [ "ISO-8859-1", "utf-16" ] )
-			catch _err
-				_err.name.should.equal( "validation-config-charsetsubject" )
-				done()
-				return
-
-			throw "wrong charsetsubject not thrown"
-			return
-
-		it 'change configuration - charsettext null', ( done )->
-			_cnf = mailFactoryA.config( charsetText: null )
-
-			_cnf.should.have.property( "charsetText" ).with.eql( null )
-			done()
-
-			return
-
-		it 'change configuration - charsettext', ( done )->
-			_cnf = mailFactoryA.config( charsetText: "ISO-8859-1" )
-
-			_cnf.should.have.property( "charsetText" ).with.be.a( "string" ).and.equal "ISO-8859-1"
-
-			done()
-
-			return
-
-		it 'change configuration - wrong charsettext', ( done )->
-			try
-				_cnf = mailFactoryA.config( charsetText: 1365 )
-			catch _err
-				_err.name.should.equal( "validation-config-charsettext" )
-				done()
-				return
-
-			throw "wrong charsettext not thrown"
-			return
-
-		it 'change configuration - multiple charsettexts', ( done )->
-			try
-				_cnf = mailFactoryA.config( charsetText: [ "ISO-8859-1", "utf-16" ] )
-			catch _err
-				_err.name.should.equal( "validation-config-charsettext" )
-				done()
-				return
-
-			throw "wrong charsettext not thrown"
-			return
-
-		it 'change configuration - charsethtml', ( done )->
-			_cnf = mailFactoryA.config( charsetHtml: "ISO-8859-1" )
-	
-			_cnf.should.have.property( "charsetHtml" ).with.be.a( "string" ).and.equal "ISO-8859-1"
-			
-			done()
-
-			return
-
-		it 'change configuration - charsethtml null', ( done )->
-			_cnf = mailFactoryA.config( charsetHtml: null )
-
-			_cnf.should.have.property( "charsetHtml" ).with.eql( null )
-			done()
-
-			return
-
-		it 'change configuration - wrong charsethtml', ( done )->
-			try
-				_cnf = mailFactoryA.config( charsetHtml: 1365 )
-			catch _err
-				_err.name.should.equal( "validation-config-charsethtml" )
-				done()
-				return
-
-			throw "wrong charsethtml not thrown"
-			return
-
-		it 'change configuration - multiple charsethtmls', ( done )->
-			try
-				_cnf = mailFactoryA.config( charsetHtml: [ "ISO-8859-1", "utf-16" ] )
-			catch _err
-				_err.name.should.equal( "validation-config-charsethtml" )
-				done()
-				return
-
-			throw "wrong charsethtml not thrown"
-			return
-
 		return
 
 
@@ -718,19 +562,6 @@ describe 'MAIL-FACTORY-TEST', ->
 			throw "wrong subject - reset not thrown"
 			return
 
-		it 'set subject - charset', ( done )->
-			_val = "Test Subject charset"
-			_subject = mailA.subject( _val, "ISO-8859-1" ).subject()
-
-			_subject.should.be.a( "string" ).and.equal _val
-
-			mailA._getAttributes().should.have.property( "charsetSubject" ).with.be.a( "string" ).and.equal "ISO-8859-1"
-
-
-			done()
-
-			return
-
 		it 'set subject - wrong type', ( done )->
 			_val = [ "my array subject" ]
 		
@@ -843,21 +674,6 @@ describe 'MAIL-FACTORY-TEST', ->
 				return
 
 			throw "wrong html - type not thrown"
-			return
-
-		it 'set html - charset "Windows 1252"', ( done )->
-			fs.readFile './test/data/html_example_win1252.html', ( err, file )->
-
-				_val = file.toString( "utf-8" )
-				_html = mailA.html( _val, "Windows 1252" ).html()
-
-				_html.should.be.a( "string" ).and.equal _val
-
-				mailA._getAttributes().should.have.property( "charsetHtml" ).with.be.a( "string" ).and.equal "Windows 1252".toUpperCase()
-
-				done()
-				return
-
 			return
 
 		it 'set reply - single', ( done )->

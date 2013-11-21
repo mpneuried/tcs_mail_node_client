@@ -25,15 +25,7 @@ module.exports = class MailFactory extends require( "./basic" )
 			from: null
 			# **reply** *String | Array* A single reply address or an array of multiple addresses as standard reply. This could be overwritten by `Mail.reply( mails )
 			reply: null
-			# **charset** *String* General charset. Changing this config will effect all charsets that are not defined specially via `.config()` or `Mail` methods.
-			charset: "utf-8"
-			# **charsetSubject** *String* Subject charset. Will only be send to server if not `utf-8`.
-			charsetSubject: null
-			# **charsetText** *String* Text charset. Will only be send to server if not `utf-8`.
-			charsetText: null
-			# **charsetHtml** *String* Html charset. Will only be send to server if not `utf-8`.
-			charsetHtml: null
-			# **simulate** *Boolean* Switch to run factory in simulation mode. Used within test scripts.
+			# only simulate sending as console output. Just for testing.
 			simulate: false
 
 			# TODO template configuration
@@ -147,7 +139,6 @@ module.exports = class MailFactory extends require( "./basic" )
 				when "sendermail", "returnPath" ,"from" then @_validateEmail( "config-#{ key }", val, false, false )
 				when "reply" then @_validateEmail( "config-#{ key }", val, false, true )
 				when "endpoint" then @_validateUrl( "config-#{ key }", val, true )
-				when "charset", "charsetSubject", "charsetText", "charsetHtml" then @_validateCharset( "config-#{ key }", val )
 				when "security"
 					@_validateObject( "config-#{ key }", val )
 					config.security = _.pick( config.security, "apikey" )
@@ -186,8 +177,4 @@ module.exports = class MailFactory extends require( "./basic" )
 			"validation-config-returnpath": "The given returnPath address is not valid"
 			"validation-config-from": "The given from address is not valid"
 			"validation-config-reply": "The given from contains one ore more invalid addresses"
-			"validation-config-charset": "The given charset is not a string"
-			"validation-config-charsetsubject": "The given charsetSubject is not a string"
-			"validation-config-charsettext": "The given charsetText is not a string"
-			"validation-config-charsethtml": "The given charsetHtml is not a string"
 			"validation-config-security": "The given security credentials are not an object. Only the keys: `#{ @_allowedSecurityKeys.join( "," ) }` are allowed."

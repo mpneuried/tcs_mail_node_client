@@ -31,10 +31,6 @@ Creates the mail factory to send mail via the tcs mail service.
 * `config.returnPath` *( String [ optional; default = "bounces@tcs.de" ] )*: Adress for returning mails.
 * `config.from` *( String [ optional; default = @sendermail ] )*: Usually this will be the sender mail. But it's possible to us a human friendly naming.
 * `config.reply` *( String | Array )*: A single reply address or an array of multiple addresses as standard reply. This could be overwritten by `Mail.reply( mails )`* 
-* `config.charset` *( String [ optional; default = "utf-8" ] )*: General charset. Changing this config will effect all charset configurations.
-* `config.charsetHtml` *( String [ optional; default = "utf-8" ] )*: Html charset. Will only be send to server if not `utf-8`
-* `config.charsetText` *( String [ optional; default = "utf-8" ] )*: Html charset. Will only be send to server if not `utf-8`
-* `config.charsetSubject` *( String [ optional; default = "utf-8" ] )*: Html charset. Will only be send to server if not `utf-8`
 * `config.simulate` *( Boolean [ optional; default = false] )*: This is just a switch to prevent the final send to the mail service. It's been used to test the module. With this switch you can also turn of mail sending within your dev environment.
 
 **TODO** Template configuraton
@@ -172,7 +168,7 @@ Set the **BCC** addresses. If set to `false` the current **BCC** will be cleared
 
 *( Mail )*: The `Mail` object self for chaining.
 
-#### `Mail.subject( subject [, charset ] )`
+#### `Mail.subject( subject )`
   
 Set the subject of this mail.
 
@@ -181,7 +177,6 @@ Set the subject of this mail.
 **arguments**
 
 * `mails` *( String )*: A subject string to describe the content of this mail
-* `charset` *( String [ optional, default=config.charsetSubject ] )*: Overwrite default charset
 
 **Return**
 
@@ -213,27 +208,25 @@ If this method is not used the standard from `MailFactory.config.returnPath` wil
 
 *( Mail )*: The `Mail` object self for chaining.
 
-#### `Mail.html( source [, charset ] )`
+#### `Mail.html( source )`
 
 The raw mail html source to send.
 
 **arguments**
 
 * `source` *( String )*: Mail html source.
-* `charset` *( String [ optional, default=config.charsetHtml ] )*: Overwrite default charset
 
 **Return**
 
 *( Mail )*: The `Mail` object self for chaining.
 
-#### `Mail.text( text [, charset ] )`
+#### `Mail.text( text )`
 
 The raw mail text to send.
 
 **arguments**
 
 * `source` *( String )*: Mail html source.
-* `charset` *( String [ optional, default=config.charsetHtml ] )*: Overwrite default charset
 
 **Return**
 
@@ -291,6 +284,7 @@ mail.send ( err )=>
 ## Changelogs
 |Version|Date|Description|
 |:--:|:--:|:--|
+|0.2.0|2013-11-21|Removed all charset settings because of a refactored server module which only allowed standard utf8|
 |0.1.5|2013-11-05|Small bugfix in simulation output|
 |0.1.4|2013-11-05|Detailed simulated output|
 |0.1.3|2013-08-12|fixed usage of factory configurations|
