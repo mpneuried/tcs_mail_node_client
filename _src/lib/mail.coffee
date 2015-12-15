@@ -1,11 +1,11 @@
-_ = require( "underscore" )
+_ = require( "lodash" )
 
 
 module.exports = class Mail extends require( "./basic" )
 
 	constructor: ( @id, @factory, options = {} )->
 
-		@attributes = {} 
+		@attributes = {}
 
 		@created = Date.now()
 
@@ -20,7 +20,6 @@ module.exports = class Mail extends require( "./basic" )
 			if err
 				callback( err )
 				return
-
 			# start request
 			@factory._send( mailData, @_handleSend( callback ) )
 			return
@@ -122,7 +121,7 @@ module.exports = class Mail extends require( "./basic" )
 		else
 			@attributes.html
 
-	tmpl: ( tmplName, data , language, type )=>
+	tmpl: ( tmplName, data , language, type )->
 		console.log "TODO"
 		return
 
@@ -131,7 +130,7 @@ module.exports = class Mail extends require( "./basic" )
 	
 	_getAttributes: =>
 		factoryDefaults = _.pick( @factory.config(), [ "returnPath", "reply" ] )
-		_.extend( {}, factoryDefaults, @attributes )
+		return _.extend( {}, factoryDefaults, @attributes )
 
 	_validateAndConvertAttributes: ( attrs, cb )=>
 
@@ -141,7 +140,7 @@ module.exports = class Mail extends require( "./basic" )
 			return
 
 		# check for at least one receiver
-		if _.compact( _.union( attrs?.to, attrs?.cc, attrs?.bcc ) ).length <= 0
+		if _.compact( _.union( [ attrs?.to, attrs?.cc, attrs?.bcc ] ) ).length <= 0
 			@_handleError( cb, "validation-mail-receiver-missing" )
 			return
 
@@ -155,7 +154,7 @@ module.exports = class Mail extends require( "./basic" )
 		factoryConf = @factory.config()
 
 		# define base object
-		serviceData = 
+		serviceData =
 			appid: @factory.appid
 			email: {}
 		
@@ -178,9 +177,9 @@ module.exports = class Mail extends require( "./basic" )
 		serviceData.email.ReplyToAddresses = ( if _.isArray( attrs.reply ) then attrs.reply else [ attrs.reply ] ) if attrs.reply?
 
 		if attrs.returnPath?
-			serviceData.email.ReturnPath = attrs.returnPath 
+			serviceData.email.ReturnPath = attrs.returnPath
 		else if factoryConf.returnPath?
-			serviceData.email.ReturnPath = factoryConf.returnPath 
+			serviceData.email.ReturnPath = factoryConf.returnPath
 
 		# set mail subject and content
 		serviceData.email.Subject = attrs.subject
@@ -211,27 +210,26 @@ module.exports = class Mail extends require( "./basic" )
 			callback( null, _ret )
 			return
 
-	_decodeError: ( raw )=>
+	_decodeError: ( raw )->
 		ret = raw?.Body?.ErrorResponse?.Error
 
 		if ret
-			ret
-		else
-			raw	
+			return ret
+			
+		return raw
 
-	_decodeReturn: ( raw )=>
+	_decodeReturn: ( raw )->
 		ret = {}
 
 		ret.recipients = raw.recipients or null
 		ret.recipients_blacklisted = raw.recipients_blacklisted  or null
 		if ret
-			ret
-		else
-			raw	
+			return ret
+		return raw
 
 	# # Errors detail helper
 	ERRORS: =>
-		_.extend super, 
+		_.extend super,
 			"validation-mail-to": "The given `to` contains one ore more invalid addresses"
 			"validation-mail-cc": "The given `cc` contains one ore more invalid addresses"
 			"validation-mail-bcc": "The given `bcc` contains one ore more invalid addresses"

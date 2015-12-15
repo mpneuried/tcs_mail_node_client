@@ -2,7 +2,7 @@
 
 # Basics to handle errors and initialize modules
 
-_ = require( "underscore" )
+_ = require( "lodash" )
 
 module.exports = class Basic extends require('events').EventEmitter
 	# ## internals
@@ -142,4 +142,3 @@ module.exports = class Basic extends require('events').EventEmitter
 
 	ERRORS: =>
 		{}
-

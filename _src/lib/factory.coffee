@@ -1,4 +1,4 @@
-_ = require( "underscore" )
+_ = require( "lodash" )
 async = require( "async" )
 request = require( "request" )
 
@@ -12,7 +12,7 @@ module.exports = class MailFactory extends require( "./basic" )
 
 	# ## defaults
 	defaults: =>
-		_.extend super, 
+		_.extend super,
 			# **sendermail** *String* The sender mail address. This could also be defined in server based on the `appid`
 			sendermail: null
 			# **endpoint** *String* The target url
@@ -72,7 +72,7 @@ module.exports = class MailFactory extends require( "./basic" )
 		async.series afns, ( err, results )=>
 			if err
 				@_handleError( callback, err )
-				return		
+				return
 			callback( null, results )
 			return
 		return
@@ -81,16 +81,15 @@ module.exports = class MailFactory extends require( "./basic" )
 	
 	_send: ( mailData, callback )=>
 
-		reqOpt = 
+		reqOpt =
 			url: @_cnf.endpoint
 			method: "POST"
 			json: mailData
 
 		reqOpt.headers = @_cnf.security
 
-
 		if @_cnf.simulate
-			_.delay( =>
+			_.delay( ->
 				_recipients = _.compact( _.union( reqOpt.json.email?.ToAddresses, reqOpt.json.email?.CcAddresses, reqOpt.json.email?.BccAddresses ) )
 				_sout = """
 ===========================================
@@ -126,9 +125,10 @@ module.exports = class MailFactory extends require( "./basic" )
 				console.log _sout
 				callback( null, { statusCode: 200, body: { simulated: true, recipients: _recipients } } )
 			, 300 )
-		else
-			#console.log "SEND", reqOpt.json
-			request( reqOpt, callback )
+			return
+		
+		#console.log "SEND", reqOpt.json
+		request( reqOpt, callback )
 
 		return
 	
@@ -170,7 +170,7 @@ module.exports = class MailFactory extends require( "./basic" )
 
 	# # Errors detail helper
 	ERRORS: =>
-		_.extend super, 
+		_.extend super,
 			# config 
 			"validation-config-sendermail": "The given sendermail is not a valid e-mail"
 			"validation-config-endpoint": "The given endpoint is not a vaild url"

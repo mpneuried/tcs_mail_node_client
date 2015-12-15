@@ -1,5 +1,5 @@
 fs = require("fs")
-_ = require("underscore")
+_ = require("lodash")
 should = require('should')
 
 MailFactory = require("../lib/index")
@@ -15,7 +15,7 @@ catch _err
 		config:
 			endpoint: "http://localhost:3000/email/send"
 
-_Cnf = 
+_Cnf =
 	realReceiver: "mp@tcs.de"
 	realCcReceiver: "mp+cc@tcs.de"
 	realBccReceiver: "mp+bcc@tcs.de"
@@ -86,7 +86,7 @@ describe 'MAIL-FACTORY-TEST', ->
 
 			_cnf = mailFactoryA.config( sendermail: "test@tcs.de" )
 
-			_cnf.should.have.property( "sendermail" ).with.be.a( "string" ).and.equal "test@tcs.de"
+			_cnf.should.have.property( "sendermail" ).with.be.a.String().and.equal "test@tcs.de"
 			done()
 
 			return
@@ -99,7 +99,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong sendermail not thrown"
+			throw new Error( "wrong sendermail not thrown" )
 
 			return
 
@@ -111,13 +111,13 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong sendermail not thrown"
+			throw new Error( "wrong sendermail not thrown" )
 			return
 
 		it 'change configuration - endpoint', ( done )->
 			_cnf = mailFactoryA.config( endpoint: "http://nodetest.tcs.de/email/send" )
 
-			_cnf.should.have.property( "endpoint" ).with.be.a( "string" ).and.equal "http://nodetest.tcs.de/email/send"
+			_cnf.should.have.property( "endpoint" ).with.be.a.String().and.equal "http://nodetest.tcs.de/email/send"
 			done()
 
 			return
@@ -130,7 +130,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong endpoint not thrown"
+			throw new Error( "wrong endpoint not thrown" )
 			return
 
 		it 'change configuration - multiple endpoints', ( done )->
@@ -141,13 +141,13 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong endpoint not thrown"
+			throw new Error( "wrong endpoint not thrown" )
 			return
 
 		it 'change configuration - security with ignored keys', ( done )->
 			_cnf = mailFactoryA.config( security: { b: "asdf", a: 123 } )
 
-			_cnf.should.have.property( "security" ).with.be.a( "object" ).and.eql {}
+			_cnf.should.have.property( "security" ).with.be.a.Object().and.eql {}
 
 			done()
 
@@ -156,7 +156,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		it 'change configuration - security', ( done )->
 			_cnf = mailFactoryA.config( security: { apikey: "abcdefg", xxx: 1233 } )
 
-			_cnf.should.have.property( "security" ).with.be.a( "object" ).and.eql { apikey: "abcdefg" }
+			_cnf.should.have.property( "security" ).with.be.a.Object().and.eql { apikey: "abcdefg" }
 
 			done()
 
@@ -170,13 +170,13 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong security not thrown"
+			throw new Error( "wrong security not thrown" )
 			return
 
 		it 'change configuration - returnpath', ( done )->
 			_cnf = mailFactoryA.config( returnPath: "return@tcs.de" )
 
-			_cnf.should.have.property( "returnPath" ).with.be.a( "string" ).and.equal "return@tcs.de"
+			_cnf.should.have.property( "returnPath" ).with.be.a.String().and.equal "return@tcs.de"
 
 			done()
 
@@ -198,7 +198,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong returnpath not thrown"
+			throw new Error( "wrong returnpath not thrown" )
 			return
 
 		it 'change configuration - multiple returnpaths', ( done )->
@@ -209,7 +209,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong returnpath not thrown"
+			throw new Error( "wrong returnpath not thrown" )
 			return
 
 		it 'change configuration - from', ( done )->
@@ -226,7 +226,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong from not thrown"
+			throw new Error( "wrong from not thrown" )
 			return
 
 		it 'change configuration - multiple froms', ( done )->
@@ -237,13 +237,13 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong from not thrown"
+			throw new Error( "wrong from not thrown" )
 			return
 
 		it 'change configuration - reply', ( done )->
 			_cnf = mailFactoryA.config( reply: "return@tcs.de" )
 
-			_cnf.should.have.property( "reply" ).with.be.a( "string" ).and.equal "return@tcs.de"
+			_cnf.should.have.property( "reply" ).with.be.a.String().and.equal "return@tcs.de"
 			done()
 
 			return
@@ -256,7 +256,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong reply not thrown"
+			throw new Error( "wrong reply not thrown" )
 			return
 
 		it 'change configuration - multiple replys', ( done )->
@@ -272,7 +272,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		it 'change configuration - multiple replys + one wrong', ( done )->
 			try
 				_cnf = mailFactoryA.config( reply: [ "test@success.de", "wrongmail" ] )
-				throw "wrong reply not thrown"
+				throw new Error( "wrong reply not thrown" )
 			catch _err
 				_err.name.should.equal( "validation-config-reply" )
 				done()
@@ -292,7 +292,7 @@ describe 'MAIL-FACTORY-TEST', ->
 			mails.push( mail )
 			mail.should.be.instanceOf Mail
 
-			mails[ 0 ].should.eql( mail ) 
+			mails[ 0 ].should.eql( mail )
 
 			done()
 
@@ -303,7 +303,7 @@ describe 'MAIL-FACTORY-TEST', ->
 
 			mail.should.be.instanceOf Mail
 
-			mails[ 0 ].should.eql( mail ) 
+			mails[ 0 ].should.eql( mail )
 
 			done()
 
@@ -333,7 +333,7 @@ describe 'MAIL-FACTORY-TEST', ->
 			return
 
 		it 'send all mails', ( done )->
-			mailFactoryA.sendAll ( err )=>
+			mailFactoryA.sendAll ( err )->
 
 				should.not.exist( err )
 
@@ -358,7 +358,7 @@ describe 'MAIL-FACTORY-TEST', ->
 			mails.push( mailA )
 			mailA.should.be.instanceOf Mail
 
-			mails[ 0 ].should.eql( mailA ) 
+			mails[ 0 ].should.eql( mailA )
 
 			done()
 
@@ -367,7 +367,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		it 'set to - single', ( done )->
 			_to = mailA.to( "test@tcs.de" ).to()
 
-			_to.should.be.a( "string" ).and.equal "test@tcs.de"
+			_to.should.be.a.String().and.equal "test@tcs.de"
 
 			done()
 
@@ -385,7 +385,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		it 'set to - multiple', ( done )->
 			_to = mailA.to( [ "testA@tcs.de", "testB@tcs.de", "testC@tcs.de" ] ).to()
 
-			_to.should.be.an.instanceof( Array ).and.have.length( 3 )
+			_to.should.be.an.Array().and.have.length( 3 )
 
 			done()
 
@@ -400,7 +400,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong to - single not thrown"
+			throw new Error( "wrong to - single not thrown" )
 			return
 
 		it 'set to - multiple wrong', ( done )->
@@ -412,13 +412,13 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong to - multiple not thrown"
+			throw new Error( "wrong to - multiple not thrown" )
 			return
 
 		it 'set cc - single', ( done )->
 			_cc = mailA.cc( "test@tcs.de" ).cc()
 
-			_cc.should.be.a( "string" ).and.equal "test@tcs.de"
+			_cc.should.be.a.String().and.equal "test@tcs.de"
 
 			done()
 
@@ -427,7 +427,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		it 'set cc - multiple', ( done )->
 			_cc = mailA.cc( [ "testA@tcs.de", "testB@tcs.de", "testC@tcs.de" ] ).cc()
 
-			_cc.should.be.an.instanceof( Array ).and.have.length( 3 )
+			_cc.should.be.an.Array().and.have.length( 3 )
 
 			done()
 
@@ -442,7 +442,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong cc - single not thrown"
+			throw new Error( "wrong cc - single not thrown" )
 			return
 
 		it 'set cc - multiple wrong', ( done )->
@@ -454,7 +454,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong cc - multiple not thrown"
+			throw new Error( "wrong cc - multiple not thrown" )
 			return
 
 		it 'set cc - reset', ( done )->
@@ -470,7 +470,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		it 'set bcc - single', ( done )->
 			_bcc = mailA.bcc( "test@tcs.de" ).bcc()
 
-			_bcc.should.be.a( "string" ).and.equal "test@tcs.de"
+			_bcc.should.be.a.String().and.equal "test@tcs.de"
 
 			done()
 
@@ -479,7 +479,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		it 'set bcc - multiple', ( done )->
 			_bcc = mailA.bcc( [ "testA@tcs.de", "testB@tcs.de", "testC@tcs.de" ] ).bcc()
 
-			_bcc.should.be.an.instanceof( Array ).and.have.length( 3 )
+			_bcc.should.be.an.Array().and.have.length( 3 )
 
 			done()
 
@@ -494,7 +494,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong bcc - single not thrown"
+			throw new Error( "wrong bcc - single not thrown" )
 			return
 
 		it 'set bcc - multiple wrong', ( done )->
@@ -506,7 +506,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong bcc - multiple not thrown"
+			throw new Error( "wrong bcc - multiple not thrown" )
 			return
 
 		it 'set bcc - reset', ( done )->
@@ -521,7 +521,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		it 'set subject', ( done )->
 			_subject = mailA.subject( "Test Subject" ).subject()
 
-			_subject.should.be.a( "string" ).and.equal "Test Subject"
+			_subject.should.be.a.String().and.equal "Test Subject"
 
 			done()
 
@@ -531,7 +531,7 @@ describe 'MAIL-FACTORY-TEST', ->
 			_val = randomString( 150, 2, .2, .05 )
 			_subject = mailA.subject( _val ).subject()
 
-			_subject.should.be.a( "string" ).and.equal _val
+			_subject.should.be.a.String().and.equal _val
 
 			done()
 
@@ -541,7 +541,7 @@ describe 'MAIL-FACTORY-TEST', ->
 			_val = "<b>This is my html string</b>"
 			_subject = mailA.subject( _val ).subject()
 
-			_subject.should.be.a( "string" ).and.equal _val
+			_subject.should.be.a.String().and.equal _val
 
 			done()
 
@@ -555,11 +555,11 @@ describe 'MAIL-FACTORY-TEST', ->
 
 				_val = "<b>This is my html string</b>"
 				_subject = mailA.subject()
-				_subject.should.be.a( "string" ).and.equal _val
+				_subject.should.be.a.String().and.equal _val
 				done()
 				return
 
-			throw "wrong subject - reset not thrown"
+			throw new Error( "wrong subject - reset not thrown" )
 			return
 
 		it 'set subject - wrong type', ( done )->
@@ -572,14 +572,14 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong subject - type not thrown"
+			throw new Error( "wrong subject - type not thrown" )
 			return
 
 		it 'set text', ( done )->
 			_val = randomString( 150, 2, .2, .05 )
 			_text = mailA.text( _val ).text()
 
-			_text.should.be.a( "string" ).and.equal _val
+			_text.should.be.a.String().and.equal _val
 
 			done()
 
@@ -589,7 +589,7 @@ describe 'MAIL-FACTORY-TEST', ->
 			_val = "<b>My HTML subject</b>"
 			_text = mailA.text( _val ).text()
 
-			_text.should.be.a( "string" ).and.equal _val
+			_text.should.be.a.String().and.equal _val
 
 			done()
 
@@ -609,7 +609,7 @@ describe 'MAIL-FACTORY-TEST', ->
 			_val = randomString( 1000, 2, .2, .05 )
 			_text = mailA.text( _val ).text()
 
-			_text.should.be.a( "string" ).and.equal _val
+			_text.should.be.a.String().and.equal _val
 
 			done()
 
@@ -625,14 +625,14 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong text - type not thrown"
+			throw new Error( "wrong text - type not thrown" )
 			return
 
 		it 'set html', ( done )->
 			_val = randomString( 150, 2, .2, .05 )
 			_html = mailA.html( _val ).html()
 
-			_html.should.be.a( "string" ).and.equal _val
+			_html.should.be.a.String().and.equal _val
 
 			done()
 
@@ -646,7 +646,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				_val = file.toString( "utf-8" )
 				_html = mailA.html( _val ).html()
 
-				_html.should.be.a( "string" ).and.equal _val
+				_html.should.be.a.String().and.equal _val
 
 				done()
 				return
@@ -673,13 +673,13 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong html - type not thrown"
+			throw new Error( "wrong html - type not thrown" )
 			return
 
 		it 'set reply - single', ( done )->
 			_reply = mailA.reply( "test@tcs.de" ).reply()
 
-			_reply.should.be.a( "string" ).and.equal "test@tcs.de"
+			_reply.should.be.a.String().and.equal "test@tcs.de"
 
 			done()
 
@@ -697,7 +697,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		it 'set reply - multiple', ( done )->
 			_reply = mailA.reply( [ "testA@tcs.de", "testB@tcs.de", "testC@tcs.de" ] ).reply()
 
-			_reply.should.be.an.instanceof( Array ).and.have.length( 3 )
+			_reply.should.be.an.Array().and.have.length( 3 )
 
 			done()
 
@@ -707,7 +707,7 @@ describe 'MAIL-FACTORY-TEST', ->
 
 			try
 				_reply = mailA.reply( "testAtcs.de" )
-				throw "wrong reply - single not thrown"
+				throw new Error( "wrong reply - single not thrown" )
 			catch _err
 				_err.name.should.equal( "validation-mail-reply" )
 				done()
@@ -723,14 +723,14 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong reply - multiple not thrown"
+			throw new Error( "wrong reply - multiple not thrown" )
 			return
 
 
 		it 'set returnPath - single', ( done )->
 			_returnPath = mailA.returnPath( "test@tcs.de" ).returnPath()
 
-			_returnPath.should.be.a( "string" ).and.equal "test@tcs.de"
+			_returnPath.should.be.a.String().and.equal "test@tcs.de"
 
 			done()
 
@@ -754,7 +754,7 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong returnPath - multiple not thrown"
+			throw new Error( "wrong returnPath - multiple not thrown" )
 			return
 
 		it 'set returnPath - single wrong', ( done )->
@@ -766,11 +766,11 @@ describe 'MAIL-FACTORY-TEST', ->
 				done()
 				return
 
-			throw "wrong returnPath - single not thrown"
+			throw new Error( "wrong returnPath - single not thrown" )
 			return
 
 		it 'send this mail', ( done )->
-			mailA.send ( err )=>
+			mailA.send ( err )->
 				if err
 					throw err
 					return
@@ -785,7 +785,7 @@ describe 'MAIL-FACTORY-TEST', ->
 		mailFactoryB = null
 
 		it 'create new factory', ( done )->
-			mailFactoryB = new MailFactory(  _Cnf.factoryB.appid, _Cnf.factoryB.config  )
+			mailFactoryB = new MailFactory( _Cnf.factoryB.appid, _Cnf.factoryB.config )
 
 			mailFactoryB.should.be.an.instanceOf MailFactory
 
@@ -794,46 +794,47 @@ describe 'MAIL-FACTORY-TEST', ->
 
 		it 'create and send mail - simple', ( done )->
 
-			mailFactoryB.create().subject( "Simple Test" ).text( "TEST" ).to( _Cnf.realReceiver ).send  ( err, result )=>
+			_mail = mailFactoryB.create().subject( "Simple Test" ).text( "TEST" ).to( _Cnf.realReceiver )
+			_mail.send ( err, result )->
 				should.not.exist( err )
-				result.should.have.property( "recipients" ).with.be.an.instanceof( Array ).and.include( _Cnf.realReceiver )
+				result.should.have.property( "recipients" ).with.be.an.Array().and.containEql( _Cnf.realReceiver )
 				done()
 				return
 			return
 
 		it 'create and send mail - missing subject', ( done )->
 
-			mailFactoryB.create().to( "testB@tcs.de" ).send ( err )=>
+			mailFactoryB.create().to( "testB@tcs.de" ).send ( err )->
 				should.exist( err )
-				err.should.have.property( "name" ).with.be.a( "string" ).and.equal "validation-mail-subject-missing"
+				err.should.have.property( "name" ).with.be.a.String().and.equal "validation-mail-subject-missing"
 				done()
 				return
 			return
 
 		it 'create and send mail - missing receiver', ( done )->
 
-			mailFactoryB.create().subject( "no receiver" ).send ( err )=>
+			mailFactoryB.create().subject( "no receiver" ).send ( err )->
 				should.exist( err )
-				err.should.have.property( "name" ).with.be.a( "string" ).and.equal "validation-mail-receiver-missing"
+				err.should.have.property( "name" ).with.be.a.String().and.equal "validation-mail-receiver-missing"
 				done()
 				return
 			return
 
 		it 'create and send mail - missing content', ( done )->
 
-			mailFactoryB.create().subject( "missing content" ).bcc( _Cnf.realReceiver ).send ( err, result )=>
+			mailFactoryB.create().subject( "missing content" ).bcc( _Cnf.realReceiver ).send ( err, result )->
 				should.exist( err )
-				err.should.have.property( "name" ).with.be.a( "string" ).and.equal "validation-mail-content-missing"
+				err.should.have.property( "name" ).with.be.a.String().and.equal "validation-mail-content-missing"
 				done()
 				return
 			return
 
 		it 'create and send mail - with html content', ( done )->
 
-			mailFactoryB.create().subject( "HTML TEST" ).html( "<html><header><style>h1{color:#f00;}</style></header><body><h1 class=\"test\">Simple html content</h1><p>Test the sending of mails</p></html></body>" ).to( _Cnf.realReceiver ).send ( err, result )=>
+			mailFactoryB.create().subject( "HTML TEST" ).html( "<html><header><style>h1{color:#f00;}</style></header><body><h1 class=\"test\">Simple html content</h1><p>Test the sending of mails</p></html></body>" ).to( _Cnf.realReceiver ).send ( err, result )->
 				should.not.exist( err )
 
-				result.should.have.property( "recipients" ).with.be.an.instanceof( Array ).and.include( _Cnf.realReceiver )
+				result.should.have.property( "recipients" ).with.be.an.Array().and.containEql( _Cnf.realReceiver )
 				done()
 				return
 			return
@@ -844,10 +845,10 @@ describe 'MAIL-FACTORY-TEST', ->
 					throw err
 					return
 				_val = file.toString( "utf-8" )
-				mailFactoryB.create().subject( "TCS E-Mail Node Client" ).html( _val ).to( _Cnf.realReceiver ).bcc( _Cnf.realCcReceiver ).send ( err, result )=>
+				mailFactoryB.create().subject( "TCS E-Mail Node Client" ).html( _val ).to( _Cnf.realReceiver ).bcc( _Cnf.realCcReceiver ).send ( err, result )->
 					should.not.exist( err )
 
-					result.should.have.property( "recipients" ).with.be.an.instanceof( Array ).and.include( _Cnf.realReceiver )
+					result.should.have.property( "recipients" ).with.be.an.Array().and.containEql( _Cnf.realReceiver )
 					done()
 					return
 				return

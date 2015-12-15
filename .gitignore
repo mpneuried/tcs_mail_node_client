@@ -12,6 +12,17 @@ $ cat .gitignore
 /node_modules/*
 dump.rdb
 /*.js
+*.mo
+*.sublime*
+config.json
+config*.json
+deploy.json
+*.js
 .DS_Store
 
-*.sublime*
+*.zip
+*.rdb
+*.dat
+*.data
+
+.idea

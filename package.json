@@ -3,7 +3,7 @@
 	"name": "tcs_node_mail_client",
 	"description": "TCS node Mail Client",
 	"tags": [ "mail", "service", "send", "template", "simple", "tcs" ],
-	"version": "0.2.0",
+	"version": "0.2.1",
 	"homepage": "www.tcs.de",
 	"private": false,
 	"main": "./lib/index.js",
@@ -14,24 +14,25 @@
 		"type": "git",
 		"url": "git@github.com:mpneuried/tcs_mail_node_client.git"
 	},
+	"license": "MIT",
 	"engines": {
 		"node": "> 0.8.10"
 	},
 	"scripts": {
 		"test": "mocha ./test/test.js"
 	},
-	"dependencies": {
-		"async": "*",
-		"underscore": "*",
-		"request": "*"
+	"dependencies":{
+		"async":"1.5.x",
+		"lodash":"3.10.x",
+		"request":"2.67.x"
 	},
-	"devDependencies": {
-		"coffee-script": "*",
-		"should": "*",
-		"grunt": "*",
-		"grunt-contrib-watch": "*",
-		"grunt-contrib-coffee": "*",
-		"grunt-include-replace": "*",
-		"grunt-mocha-cli": "*"
+	"devDependencies":{
+		"coffee-script":"1.10.x",
+		"grunt":"0.4.x",
+		"grunt-contrib-coffee":"0.13.x",
+		"grunt-contrib-watch":"0.6.x",
+		"grunt-include-replace":"3.2.x",
+		"grunt-mocha-cli":"2.0.x",
+		"should":"8.0.x"
 	}
 }

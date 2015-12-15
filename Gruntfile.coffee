@@ -41,8 +41,7 @@ module.exports = (grunt) ->
 					prefix: "@@"
 					suffix: ''
 
-				src: "lib/index.js"
-				dest: ""
+				"index.js": ["index.js"]
 
 		mochacli:
 			options:
