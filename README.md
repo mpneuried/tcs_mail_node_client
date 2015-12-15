@@ -287,6 +287,7 @@ mail.send ( err )=>
 ## Changelogs
 |Version|Date|Description|
 |:--:|:--:|:--|
+|0.2.2|2015-12-15|fixed compile error|
 |0.2.1|2015-12-15|updated dependencies and optimized code and environment to be used with node 4.2|
 |0.2.0|2013-11-21|Removed all charset settings because of a refactored server module which only allowed standard utf8|
 |0.1.5|2013-11-05|Small bugfix in simulation output|
