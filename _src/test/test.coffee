@@ -14,6 +14,7 @@ catch _err
 		appid: "wmshop"
 		config:
 			endpoint: "http://localhost:3000/email/send"
+			simulate: true
 
 _Cnf =
 	realReceiver: "mp@tcs.de"
