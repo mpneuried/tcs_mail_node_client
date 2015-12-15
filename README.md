@@ -1,5 +1,6 @@
 # TCS E-Mail Node Client
 
+[![Build Status](https://secure.travis-ci.org/mpneuried/tcs_mail_node_client.png?branch=master)](http://travis-ci.org/mpneuried/tcs_mail_node_client)
 [![dependencies](https://david-dm.org/mpneuried/tcs_mail_node_client.png)](https://david-dm.org/mpneuried/tcs_mail_node_client)
 [![NPM version](https://badge.fury.io/js/tcs_node_mail_client.png)](http://badge.fury.io/js/tcs_node_mail_client)
 
@@ -7,6 +8,8 @@
 
 This document describes the client module for the TCS e-mail service.  
 It is designed to simplify the requests to the service and provides a usable and expendable interface to integrate the service as easy as possible.
+
+[![NPM](https://nodei.co/npm/tcs_node_mail_client.png?downloads=true&stars=true)](https://nodei.co/npm/tcs_node_mail_client/)
 
 ###Note:
 
@@ -284,6 +287,7 @@ mail.send ( err )=>
 ## Changelogs
 |Version|Date|Description|
 |:--:|:--:|:--|
+|0.2.1|2015-12-15|updated dependencies and optimized code and environment to be used with node 4.2|
 |0.2.0|2013-11-21|Removed all charset settings because of a refactored server module which only allowed standard utf8|
 |0.1.5|2013-11-05|Small bugfix in simulation output|
 |0.1.4|2013-11-05|Detailed simulated output|
@@ -305,6 +309,8 @@ mail.send ( err )=>
 ## Ideas
 
 - Add Attachments as S3 link
+
+[![NPM](https://nodei.co/npm/tcs_node_mail_client.png?months=6)](https://nodei.co/npm/tcs_node_mail_client/)
 
 ## The MIT License (MIT)
 
