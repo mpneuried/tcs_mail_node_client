@@ -11,6 +11,7 @@ node_js:
   - 5.1
   - 5.2
   - iojs
+  - node
 before_script:
   - "npm install -g mocha grunt-cli"
   - "grunt btest"
