@@ -1,4 +1,12 @@
-_ = require( "lodash" )
+_assignIn = require( "lodash/assignIn" )
+_isEmpty = require( "lodash/isEmpty" )
+_keys = require( "lodash/keys" )
+_bind = require( "lodash/bind" )
+_delay = require( "lodash/delay" )
+_compact = require( "lodash/compact" )
+_union = require( "lodash/union" )
+_pick = require( "lodash/pick" )
+_omit = require( "lodash/omit" )
 async = require( "async" )
 request = require( "request" )
 
@@ -12,7 +20,7 @@ module.exports = class MailFactory extends require( "./basic" )
 
 	# ## defaults
 	defaults: =>
-		_.extend super,
+		_assignIn super,
 			# **sendermail** *String* The sender mail address. This could also be defined in server based on the `appid`
 			sendermail: null
 			# **endpoint** *String* The target url
@@ -40,7 +48,7 @@ module.exports = class MailFactory extends require( "./basic" )
 	# ## public methods
 
 	config: ( config = {} )=>
-		@_cnf = _.extend( @_cnf, @_validateConfig( config ) ) if config? and not _.isEmpty( config )
+		@_cnf = _assignIn( @_cnf, @_validateConfig( config ) ) if config? and not _isEmpty( config )
 
 		@_cnf
 
@@ -62,12 +70,12 @@ module.exports = class MailFactory extends require( "./basic" )
 		return
 
 	count: =>
-		_.keys( @mailCache ).length
+		_keys( @mailCache ).length
 
 	sendAll: ( callback )=>
 		afns = []
 		for id, mail of @mailCache
-			afns.push _.bind( ( ( mail, cba )-> mail.send( cba ) ), @, mail )
+			afns.push _bind( ( ( mail, cba )-> mail.send( cba ) ), @, mail )
 
 		async.series afns, ( err, results )=>
 			if err
@@ -89,8 +97,8 @@ module.exports = class MailFactory extends require( "./basic" )
 		reqOpt.headers = @_cnf.security
 
 		if @_cnf.simulate
-			_.delay( ->
-				_recipients = _.compact( _.union( reqOpt.json.email?.ToAddresses, reqOpt.json.email?.CcAddresses, reqOpt.json.email?.BccAddresses ) )
+			_delay( ->
+				_recipients = _compact( _union( reqOpt.json.email?.ToAddresses, reqOpt.json.email?.CcAddresses, reqOpt.json.email?.BccAddresses ) )
 				_sout = """
 ===========================================
 =              SIMULATED MAIL             =
@@ -141,7 +149,7 @@ module.exports = class MailFactory extends require( "./basic" )
 				when "endpoint" then @_validateUrl( "config-#{ key }", val, true )
 				when "security"
 					@_validateObject( "config-#{ key }", val )
-					config.security = _.pick( config.security, "apikey" )
+					config.security = _pick( config.security, "apikey" )
 			
 		config
 
@@ -164,13 +172,13 @@ module.exports = class MailFactory extends require( "./basic" )
 		return
 
 	_destroyMail: ( id )=>
-		@mailCache = _.omit( @mailCache, id )
+		@mailCache = _omit( @mailCache, id )
 		return
 
 
 	# # Errors detail helper
 	ERRORS: =>
-		_.extend super,
+		_assignIn super,
 			# config 
 			"validation-config-sendermail": "The given sendermail is not a valid e-mail"
 			"validation-config-endpoint": "The given endpoint is not a vaild url"

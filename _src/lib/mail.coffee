@@ -1,5 +1,8 @@
-_ = require( "lodash" )
-
+_pick = require( "lodash/pick" )
+_assignIn = require( "lodash/assignIn" )
+_compact = require( "lodash/compact" )
+_union = require( "lodash/union" )
+_isArray = require( "lodash/isArray" )
 
 module.exports = class Mail extends require( "./basic" )
 
@@ -129,8 +132,8 @@ module.exports = class Mail extends require( "./basic" )
 	# ## private methods
 	
 	_getAttributes: =>
-		factoryDefaults = _.pick( @factory.config(), [ "returnPath", "reply" ] )
-		return _.extend( {}, factoryDefaults, @attributes )
+		factoryDefaults = _pick( @factory.config(), [ "returnPath", "reply" ] )
+		return _assignIn( {}, factoryDefaults, @attributes )
 
 	_validateAndConvertAttributes: ( attrs, cb )=>
 
@@ -140,7 +143,7 @@ module.exports = class Mail extends require( "./basic" )
 			return
 
 		# check for at least one receiver
-		if _.compact( _.union( [ attrs?.to, attrs?.cc, attrs?.bcc ] ) ).length <= 0
+		if _compact( _union( [ attrs?.to, attrs?.cc, attrs?.bcc ] ) ).length <= 0
 			@_handleError( cb, "validation-mail-receiver-missing" )
 			return
 
@@ -169,12 +172,12 @@ module.exports = class Mail extends require( "./basic" )
 			serviceData.email.Source = factoryConf.source
 
 		# set receivers
-		serviceData.email.ToAddresses = ( if _.isArray( attrs.to ) then attrs.to else [ attrs.to ] ) if attrs.to?
-		serviceData.email.CcAddresses = ( if _.isArray( attrs.cc ) then attrs.cc else [ attrs.cc ] ) if attrs.cc?
-		serviceData.email.BccAddresses = ( if _.isArray( attrs.bcc ) then attrs.bcc else [ attrs.bcc ] ) if attrs.bcc?
+		serviceData.email.ToAddresses = ( if _isArray( attrs.to ) then attrs.to else [ attrs.to ] ) if attrs.to?
+		serviceData.email.CcAddresses = ( if _isArray( attrs.cc ) then attrs.cc else [ attrs.cc ] ) if attrs.cc?
+		serviceData.email.BccAddresses = ( if _isArray( attrs.bcc ) then attrs.bcc else [ attrs.bcc ] ) if attrs.bcc?
 
 		# set bounce and rely adresses
-		serviceData.email.ReplyToAddresses = ( if _.isArray( attrs.reply ) then attrs.reply else [ attrs.reply ] ) if attrs.reply?
+		serviceData.email.ReplyToAddresses = ( if _isArray( attrs.reply ) then attrs.reply else [ attrs.reply ] ) if attrs.reply?
 
 		if attrs.returnPath?
 			serviceData.email.ReturnPath = attrs.returnPath
@@ -229,7 +232,7 @@ module.exports = class Mail extends require( "./basic" )
 
 	# # Errors detail helper
 	ERRORS: =>
-		_.extend super,
+		_assignIn super,
 			"validation-mail-to": "The given `to` contains one ore more invalid addresses"
 			"validation-mail-cc": "The given `cc` contains one ore more invalid addresses"
 			"validation-mail-bcc": "The given `bcc` contains one ore more invalid addresses"

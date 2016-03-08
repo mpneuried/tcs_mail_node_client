@@ -2,7 +2,12 @@
 
 # Basics to handle errors and initialize modules
 
-_ = require( "lodash" )
+_extend = require( "lodash/extend" )
+_isString = require( "lodash/isString" )
+_isFunction = require( "lodash/isFunction" )
+_template = require( "lodash/template" )
+_isArray = require( "lodash/isArray" )
+_isObject = require( "lodash/isObject" )
 
 module.exports = class Basic extends require('events').EventEmitter
 	# ## internals
@@ -26,7 +31,7 @@ module.exports = class Basic extends require('events').EventEmitter
 	###
 	constructor: ( options )->
 
-		@_cnf = _.extend( {}, @defaults(), options )
+		@_cnf = _extend( {}, @defaults(), options )
 
 		# init errors
 		if @initErrors? then @initErrors() else @_initErrors()
@@ -48,7 +53,7 @@ module.exports = class Basic extends require('events').EventEmitter
 	###
 	_handleError: ( cb, err, data = {} )=>
 		# try to create a error Object with humanized message
-		if _.isString( err )
+		if _isString( err )
 			_err = new Error()
 			_err.name = err
 			_err.message = @_ERRORS?[ err ]?( data ) or "no details"
@@ -58,7 +63,7 @@ module.exports = class Basic extends require('events').EventEmitter
 		else
 			_err = err
 
-		if _.isFunction( cb )
+		if _isFunction( cb )
 			cb( _err )
 		else if cb is true
 			throw _err
@@ -76,8 +81,8 @@ module.exports = class Basic extends require('events').EventEmitter
 	_initErrors: =>
 		@_ERRORS = @ERRORS()
 		for key, msg of @_ERRORS
-			if not _.isFunction( msg )
-				@_ERRORS[ key ] = _.template( msg )
+			if not _isFunction( msg )
+				@_ERRORS[ key ] = _template( msg )
 		return
 
 	# validation helpers
@@ -86,10 +91,10 @@ module.exports = class Basic extends require('events').EventEmitter
 		if not value? and not required
 			return
 
-		if arrayAllowed and _.isArray( value )
+		if arrayAllowed and _isArray( value )
 			for str in value when not str.match( @_validateEmailRegex )
 				@_handleError( true, "validation-#{type.toLowerCase()}" ) 
-		else if _.isArray( value ) and not arrayAllowed
+		else if _isArray( value ) and not arrayAllowed
 			@_handleError( true, "validation-#{type.toLowerCase()}" ) 
 		else if not value.match( @_validateEmailRegex )
 			@_handleError( true, "validation-#{type.toLowerCase()}" ) 
@@ -102,10 +107,10 @@ module.exports = class Basic extends require('events').EventEmitter
 		if not value? and not required
 			return
 
-		if arrayAllowed and _.isArray( value )
+		if arrayAllowed and _isArray( value )
 			for str in value when str.length >= 2083 and not str.match( @_validateUrlRegex )
 				@_handleError( true, "validation-#{type.toLowerCase()}" ) 
-		else if _.isArray( value ) and not arrayAllowed
+		else if _isArray( value ) and not arrayAllowed
 			@_handleError( true, "validation-#{type.toLowerCase()}" ) 
 		else if not value.match( @_validateUrlRegex )
 			@_handleError( true, "validation-#{type.toLowerCase()}" ) 
@@ -116,7 +121,7 @@ module.exports = class Basic extends require('events').EventEmitter
 		if not value? and not required
 			return
 
-		if not _.isObject( value )
+		if not _isObject( value )
 			@_handleError( true, "validation-#{type.toLowerCase()}" ) 
 		
 		return
@@ -125,7 +130,7 @@ module.exports = class Basic extends require('events').EventEmitter
 		if not value? and not required
 			return
 
-		if not _.isString( value )
+		if not _isString( value )
 			@_handleError( true, "validation-#{type.toLowerCase()}" ) 
 		
 		return
@@ -134,7 +139,7 @@ module.exports = class Basic extends require('events').EventEmitter
 		if not value? and not required
 			return
 
-		if not _.isString( value )
+		if not _isString( value )
 			@_handleError( true, "validation-#{type.toLowerCase()}" ) 
 		
 		return

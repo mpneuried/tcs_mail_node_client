@@ -1,5 +1,4 @@
 fs = require("fs")
-_ = require("lodash")
 should = require('should')
 
 MailFactory = require("../lib/index")
